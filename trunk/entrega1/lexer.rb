@@ -13,18 +13,49 @@
 =end
 
 
-# Lee el archivo con las palabras reservadas del lenguaje, por defecto tokens.txt
-def initTokens f='tokens.txt'
-    # Creamos un hash para almacenar el tipo token
-    tokens= Hash.new
-    File::open(f,'r') do |f|
-        f.to_a.each do |linea|
-            linea.strip!
-            tokens[linea] ='Tok'+linea.capitalize
-        end 
-    end
-    tokens
-end
+a={	"||"=>"TokOr", 
+	"&&"=>"TokAnd",
+	"+"=>"TokPlus",
+	"do"=>"TokDo",
+	"<="=>"TokLessEq",
+	"array of"=>"TokArray",
+	","=>"TokComma",
+	"-"=>"TokMinus",
+	"begin"=>"TokBegin",
+	"true"=>"TokTrue",
+	"out"=>"TokOut",
+	"fi"=>"TokFi",
+	"$"=>"TokLength",
+	"/"=>"TokDiv",
+	"proc"=>"TokProc",
+	":"=>"TokTwoDots",
+	"%"=>"TokMod",
+	"in"=>"TokIn",
+	"["=>"TokOpBracet",
+	"end"=>"TokEnd",
+	"!="=>"TokNotEqual",
+	"<"=>"TokLess",
+	"->"=>"TokSelect",
+	"<-"=>"TokAssign",
+	"value"=>"TokValue",
+	"false"=>"TokFalse",
+	"="=>"TokEqual",
+	"show"=>"TokShow",
+	"as"=>"TokAs",
+	"if"=>"TokIf",
+	"]"=>"TokCloseBracket",
+	"main"=>"TokMain",
+	"var"=>"TokVar",
+	"~"=>"TokNot",
+	">"=>"TokMore",
+	"("=>"TokOpenParen",
+	">="=>"TokMoreEq",
+	"return"=>"TokReturn",
+	")"=>"TokCloseParen",
+	"skip"=>"TokSkip",
+	"*"=>"TokMult",
+	"od"=>"TokOd"
+}
 
 # lexer recibe un string y lo divide en sus respectivos tokens, si los hubiere. Recibe el hash de tokens y el strign a revisar. Devuelve una lista de tokens que corresponden.
 def lexer (tokens, string)
@@ -86,11 +117,6 @@ end
 puts "\n#####################################################################"
 puts "# Generamos el hash para almacenar los tokens del lenguaje Yisiel   #"
 puts "#####################################################################"
-
-a= initTokens 'Yisiel.txt' 
-a.each do |x|
-    p x
-end
 
 # Ahora, si se paso un argumento pasamos a modo consola. De lo contrario procesaremos el archivo
 consola a
