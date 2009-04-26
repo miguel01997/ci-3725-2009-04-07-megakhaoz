@@ -12,8 +12,8 @@
     
 =end
 
-
-a={	"||"=>"TokOr", 
+@texto="" #Variable Global: aqui se ha de poner el texto a leer por el lexer
+@Tok={	"||"=>"TokOr", 
 	"&&"=>"TokAnd",
 	"+"=>"TokPlus",
 	"do"=>"TokDo",
@@ -57,7 +57,7 @@ a={	"||"=>"TokOr",
 	"od"=>"TokOd"
 }
 
-# lexer recibe un string y lo divide en sus respectivos tokens, si los hubiere. Recibe el hash de tokens y el strign a revisar. Devuelve una lista de tokens que corresponden.
+# DEPRECATED? lexer recibe un string y lo divide en sus respectivos tokens, si los hubiere. Recibe el hash de tokens y el strign a revisar. Devuelve una lista de tokens que corresponden.
 def lexer (tokens, string)
     lista= []
     # Dividimos el String en palabras !
@@ -72,9 +72,121 @@ def lexer (tokens, string)
     lista
 end
 
+#INCOMPLETO Falta revisar que no se encuentre con un EOF
+def lineaComment()
+  x=@texto.match("\n") # busco donde se encuentra el proximo ENTER
+  @texto[x.pre_match+x.values_at(0)[0]]="" # elimino todo el comentario incluyendo el enter
+  
+end
+
+#INCOMPLETO Falta revisar que no se encuentre con un EOF
+def bloqueComment()
+  @texto[@texto[0,2]]="" #quito la primera "{#"
+  x=@texto=~/#\}/ # busco donde se encuentra el proximo "#}"
+  @texto[@texto[0,x+2]]="" # elimino todo el comentario incluyendo los "{#" y "#}"
+  nil
+end
+
+
+#INCOMPLETO Falta revisar que no se encuentre con un EOF
+def takeString(s)
+  @texto[@texto[0,1]]="" #quito la primera comilla
+  x=@texto.match(s) # busco donde se encuentra la proxima comilla
+  string =x.pre_match # guardo el string en una variable (excluyendo las comillas)
+  @texto[string+s]="" #elimino el string (incluyendo las comillas) del texto
+  
+  if string=~/\n/ #Si hay un enter dentro del string hay un error
+    puts "BOOM"
+  end
+  string
+end
+
+#INCOMPLETO obtener a proximo
+def tomarProximo(re)
+  x=@texto.match(re) #busco la expresion en el texto
+  if !x
+    return ""
+  end
+  if x.pre_match.empty? #si la expresion se encuentra al principio del texto
+    proximo = x.values_at(0)[0] #INCOMPLETO se deberia guardar en "proximo" el token a trabajar
+    @texto[proximo]="" # se elimina proximo del texto
+  else
+    proximo="" #si la expresion no esta al principio se devuelve un string vacio
+  end
+  proximo
+end
+
+
+def comelon (texto)
+  @texto=texto.strip
+  textoViejo=""
+  lista=[]
+  while !@texto.empty? && textoViejo!=@texto
+    textoViejo=@texto.clone
+    # Se revisa el caso EPIC FAIL: "array of", puesto que es el UNICO token con espacios
+    if @texto[0,8] == "array of" #los espacios extras han de ser omitidos? en caso tal se podria usar algo como:"tomarProximo(/array +of/)" or "tomarProximo(/array\s+of/)"
+      @texto[@texto[0,8]]="" 
+      lista << @Tok["array of"]
+    end
+    
+    #Se revisan los casos que pueden incluir mas de una palabra
+    if @texto[0,1] == "#"
+      lineaComment("\n") # Linea de Comentario
+    end 
+    if @texto[0,2] == "{#"
+      bloqueComment("#}") # Bloque de Comentario
+    end 
+    if @texto[0,1] == "\""
+      # Linea de String (si consigue un "\n" debe reportar un error.)
+      lista << ["TkStr", takeString("\"")]
+    end 
+    if @texto[0,1] == "'"
+      # Linea de String (si consigue un "\n" debe reportar un error.)
+      lista << ["TkStr", takeString("'")]
+    end 
+    
+    #Se revisa en caso que sea un numero
+    numero = tomarProximo(/-?\d+/)
+    unless numero.empty?
+      lista << ["TkNumber",numero]  #Se agrega el token del numero
+    end
+    
+    #Se revisa en caso que sea una palabra
+    palabra = tomarProximo(/[a-zA-Z]+\w*/)
+    unless palabra.empty?
+      if @Tok.has_key?(palabra)
+        lista << @Tok[palabra] #Se agrega el token de la palabra reservada
+      else
+        lista << ["TkID", palabra] #Se agrega el token del identificador
+      end
+    end
+    
+    
+    # ULTIMOS CASOS A REVISAR: los no-alfanumericos, dado que el lexer es comelon, comienza por los de 2 caracteres, si no los consigue intenta con 1, en caso que tampoco, entonces explota.
+    test=@texto[0,2]
+    if @Tok.has_key?(test)
+      lista << @Tok[test]
+      @texto[test]=""
+    else
+      test= @texto[0,1]
+      if @Tok.has_key?(test)
+      lista << @Tok[test]
+      @texto[test]=""
+      end
+    end
+    @texto.lstrip!
+  end
+  
+  if textoViejo==@texto && !@texto.empty?
+  puts "El lexer no ha podido continuar, revise la nomenclatura a partir de:\n\""+@texto+"\""
+  end
+  lista
+end
+
+
 # La consola del lexer, o en caso de que se pase un argumento le aplicará el lexer al archivo con el nombre de dicho argumento al programa
 # Recibe como unico argumento la lista de tokens para trabajar
-def consola(tks= {})
+def consola()
     starmonkey= nil
     salida= []
     if ARGV[0]== nil
@@ -85,7 +197,7 @@ def consola(tks= {})
         while starmonkey != "exit\n"
             print ">>"
             starmonkey = Kernel::gets
-            p lexer(tks, starmonkey)
+            p comelon(starmonkey)
         end
     end
     unless ARGV[0]== nil
@@ -96,7 +208,7 @@ def consola(tks= {})
         File::open( ARGV[0] , 'r' ) do |f|
             f.each do |z|
                 puts z
-                salida= salida + lexer(tks, z)
+                salida= salida + comelon(z)
             end
             puts "#####################################################################" 
         end
@@ -119,6 +231,6 @@ puts "# Generamos el hash para almacenar los tokens del lenguaje Yisiel   #"
 puts "#####################################################################"
 
 # Ahora, si se paso un argumento pasamos a modo consola. De lo contrario procesaremos el archivo
-consola a
+consola
 
 end

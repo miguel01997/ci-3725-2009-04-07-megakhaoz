@@ -1,0 +1,63 @@
+SIMBOLOS CONFLICTIVOS
+->
+-
+<-
+<=
+<
+>=
+>
+
+SIMBOLOS UNICOS
+,
+:
+[
+]
+(
+)
++
+*
+/
+%
+$
+=
+!=
+&&
+||
+~
+
+ALFANUMERICOS
+var
+value
+main
+end
+skip
+if
+fi
+do
+od
+begin
+proc
+as
+in
+out
+return
+show
+true
+
+EPIC FAIL
+array of
+
+
+
+
+
+==============================================
+Prioridades:
+# -> COMENTARIO
+" -> String up to "
+NUMBER -> TokNumber or ERROR
+array of -> TokArray 
+ALFANUMERICO -> TokAN['name'] else: TokID
+"-." -> "->" else "-"
+"<." -> "<=" else "<-" else "<"
+">." -> ">=" else ">"
