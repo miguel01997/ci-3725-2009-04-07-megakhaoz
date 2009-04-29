@@ -1,0 +1,40 @@
+{#
+	Pruebas de Estres para el Lexer
+	Epic win or Epic Fail
+	Eat Tacos
+#}
+
+#1
+{##}
+
+2347930
+var	foo,bar,baz:value
+var qux:value
+var
+grok,bleh:array of 42
+
+#2 Manejo de Strings
+main skip end
+"soy un string"
+'soy otro string'
+'soy papa de "hijo" '
+"soy mama de 'hijo' "
+"soy \n un \n string \n con\nenters"
+"soy tu peor pesadilla: \\ \\ \\\\ \\nverdad?"
+
+#3 ERRORES
+"soy
+un
+     string
+muy
+  	malo"
+234srfer
+
+/"[^"\n]*"/
+
+
+
+
+
+
+"            "   "             "
