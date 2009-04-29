@@ -105,10 +105,9 @@ def takeString(s)
   if string=~/\n/ #Si hay un enter dentro del string hay un error
     @error+="\nWarning: se ha encontrado un ENTER dentro del string \"#{string}\""
   end
-  string=string.gsub(/\\n/,"\n")
-  string=string.gsub(/\\\\/,"\\")
-  puts string
-  string
+  arreglo=string.split("\\\\")
+  arreglo.each do |str| str=str.gsub(/\\n/,"\n") end
+  string= arreglo.join("\\")
 end
 
 
@@ -250,7 +249,7 @@ def consola()
     puts "                            #{ARGV[0]}                             "
     puts "#####################################################################"
     z = File.read(ARGV[0])
-    puts z
+    p z
     puts "#####################################################################" 
     salida = comelon(z)
     salida.each do |linea| p linea end
