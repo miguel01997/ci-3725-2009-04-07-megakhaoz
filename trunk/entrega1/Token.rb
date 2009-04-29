@@ -65,9 +65,42 @@ class Token
     
     def to_s
         #" Token "+" Valor: "+ @value+" Linea : "+ @line+" Columna: "+@col
-        "Token " + self.class.to_s + " Valor: "+ @value.to_s + " Linea : " + @line.to_s + " Columna: " + @col.to_s  
+        "" + self.class.to_s + " Valor: "+ @value.to_s + " Linea : " + @line.to_s + " Columna: " + @col.to_s  
     end
 end
+
+ class TokId < Token
+    def initialize (a=0, b=0, c=0)
+        unless (a.is_a?(Numeric) && b.is_a?(Numeric)&& c.is_a?(String)) 
+            raise ArgumentError, "La fila y columna deben ser valores numericos  y el valor de este token un string."
+        end
+        @col=a
+        @line= b
+        @value= c
+    end
+ end
+ 
+ class TokNumber < Token
+    def initialize (a=0, b=0, c=0)
+        unless (a.is_a?(Numeric) && b.is_a?(Numeric) && c.is_a?(Numeric)) 
+            raise ArgumentError, "La fila, columna y valor del token deben ser valores numericos."
+        end
+        @col=a
+        @line= b
+        @value= c
+    end
+ end
+ 
+ class TokString < Token
+    def initialize (a=0, b=0, c=0)
+        unless (a.is_a?(Numeric) && b.is_a?(Numeric)&& c.is_a?(String)) 
+            raise ArgumentError, "La fila y columna deben ser valores numericos y el valor de este token un string."
+        end
+        @col=a
+        @line= b
+        @value= c
+    end
+ end
 
  class TokDo < Token
 
@@ -231,6 +264,6 @@ end
  end
  
  
-  x= TokMult.new(1,2,3)
+  x= TokString.new(1,2,'3')
   
   p x.to_s
