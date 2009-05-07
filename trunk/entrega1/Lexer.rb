@@ -4,7 +4,7 @@ class Lexer
     attr_accessor :col, :line, :value
     
     def initialize archivo
-        @value = (File.open(archivo,'r+')).readlines
+        @value = (File.open(archivo,'r')).readlines
         @col=1
         @line=1
     end
@@ -12,7 +12,7 @@ class Lexer
     def yylex
 		if (@line== nil ) then return nil end # Si es fin de archivo, chao pescado
 		a=value[line-1][col-1..value[line-1].size].strip
-		#@@Tok.each_pair { |x ,y|	if a.match(x) then b=y.new(col,line,$&);puts "#{b}";puts "#{$&.length}"; skip $&.length; return b end }
+		puts a
 		@@Exps.each { |x| if a.match(x) then b=@@Tok[x].new(col,line,$&);puts "#{b}";puts "#{$&.length}"; skip $&.length; return b end }
     end	
     
@@ -24,6 +24,6 @@ class Lexer
     
     def skip n
         @col+=n
-        if @col > @value[line-1][col-1..@value[line-1].size].size then nl end
+        if @col > @value[line-1][col-1..@value[line-1].size-2].size then nl end
     end
 end

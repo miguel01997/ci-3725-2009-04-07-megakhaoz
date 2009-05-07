@@ -169,11 +169,14 @@ end
 
 class TokMult < Token
 end
+
+class TokString < Token
+end
  
   
 
 @@Exps=[
-		/^\d+/,
+		/^\-?d+/,
 		/^[a-zA-Z][\w]*/,
 		/^\|\|/, 
         /^&&/,
@@ -187,7 +190,7 @@ end
         /^true/,
         /^out/,
         /^fi/,
-        /^$/,
+        /^\$/,
         /^\//,
         /^proc/,
         /^\:/,
@@ -224,6 +227,7 @@ end
  @@Tok={
 		/^\d+/=> TokNumber,
 		/^[a-zA-Z][\w]*/=>TokId,
+		/^"[^\n"']*"|'[^\n"']*' /=>TokString,
 		/^\|\|/=>TokOr, 
         /^&&/=>TokAnd,
         /^\+/=>TokPlus,
@@ -236,7 +240,7 @@ end
         /^true/=>TokTrue,
         /^out/=>TokOut,
         /^fi/=>TokFi,
-        /^$/=>TokLength,
+        /^\$/=>TokLength,
         /^\//=>TokDiv,
         /^proc/=>TokProc,
         /^\:/=>TokTwoDots,
