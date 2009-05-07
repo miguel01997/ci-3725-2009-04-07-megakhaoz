@@ -1,4 +1,4 @@
-require 'lexer.rb'
+require 'Lexer.rb'
 
 
 lex= Lexer.new('lol.txt')
