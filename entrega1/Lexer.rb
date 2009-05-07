@@ -26,16 +26,16 @@ class Lexer
     end
 	
    def yylex
+		if (@line== nil ) then return nil end # Si es fin de archivo, chao pescado
 		a=value[line-1][col-1..value[line-1].size]
-		if (!a.match(/\n/) && a.length==1) then return nil end # Si es fin de archivo, chao pescado
-		puts ">>"+a
 		@@Tok.each { |x ,y|	if a.match(x) then b=y.new(col,line,$&);puts "#{b}"; skip $&.length; return b end }
 		
     end	
     
     def nl
         @col=1
-		if (@line< @value.size ) then @line=@line+1 end
+        @line=@line+1
+		if (@line> @value.size ) then @line=nil end
     end
     
     def skip n
