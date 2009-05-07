@@ -8,24 +8,8 @@ class Lexer
         @col=1
         @line=1
     end
-    
-    def yylex_old
-		if (!@line) then return 'EOF'; break end 
-        a=value[line-1][col-1..value[line-1].size].lstrip
-		puts a
-        b= case a
-            when /^[a-zA-Z][\w_]+/  then TokId.new(col, line, a[/^[a-zA-Z][\w_]*/])
-            when /^\d+/             then TokNumber.new(col, line, a[/^\d+/].to_i)
-			when /^[ \t\r\f]+/      then puts a[/^[ \t\r\f]+/].size;skip a[/^[ \t\r\f]+/].size; nil
-			when /^\n/				then nl;yield
-			else nil
-        end
-		if @@Tok.has_key?(a) then puts "Hash: "+@@Tok[a] end
-        unless (b==nil) then skip b.value.size  end
-        b
-    end
-	
-   def yylex
+ 
+    def yylex
 		if (@line== nil ) then return nil end # Si es fin de archivo, chao pescado
 		a=value[line-1][col-1..value[line-1].size]
 		@@Tok.each { |x ,y|	if a.match(x) then b=y.new(col,line,$&);puts "#{b}"; skip $&.length; return b end }
