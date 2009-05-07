@@ -7,30 +7,30 @@ class Lexer
         @input = (File.open(archivo,'r'))
         @col=1
         @line=1
-	@buffer= @value.gets
+	    @buffer= @input.gets
     end
  
     def yylex
-	if (@buffer.lstrip! == nil ) then return nil end # Si es fin de archivo, chao pescado
-	
-	eliminar_comentarios()
-	puts @buffer
-	@@Exps.each { |x| if a.match(x) then b=@@Tok[x].new(col,line,$&);puts "#{b}";puts "#{$&.length}"; skip $&.length; return b end }
+	    if (@buffer == nil ) then return nil end # Si es fin de archivo, chao pescado
+	    @buffer.lstrip!
+	    eliminar_comentarios
+	    @@Exps.each { |x| if @buffer.match(x) then b=@@Tok[x].new(col,line,$&);puts "#{b}"; skip $&.length; return b end }
     end	
 
-	def eliminar_comentarios()
+	def eliminar_comentarios
 		temp_line = ""
 	end
 
     
     def nl
-	@col=1
+	    @col=1
         @line+=1
-	@buffer=@input.gets
+	    @buffer=@input.gets
     end
     
     def skip n=1
         @col+=n
-        if (@buffer.strip="/n" || @buffer.strip="") nl
+        @buffer= @buffer[n..-1]
+        if (@buffer.strip=="/n" || @buffer.strip=="") then nl end
     end
 end
