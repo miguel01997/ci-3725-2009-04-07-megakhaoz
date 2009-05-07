@@ -170,7 +170,58 @@ end
 class TokMult < Token
 end
  
- @@Tok={  
+  
+
+@@Exps=[
+		/^\d+/,
+		/^[a-zA-Z][\w]*/,
+		/^\|\|/, 
+        /^&&/,
+        /^\+/,
+        /^do/,
+        /^<=/,
+        /^array/,
+        /^of/,
+        /^,/,
+        /^begin/,
+        /^true/,
+        /^out/,
+        /^fi/,
+        /^$/,
+        /^\//,
+        /^proc/,
+        /^\:/,
+        /^%/,
+        /^in/,
+        /^\[/,
+        /^end/,
+        /^!=/,
+        /^->/,
+        /^<-/,
+        /^value/,
+        /^false/,
+        /^=/,
+        /^show/,
+        /^as/,
+        /^if/,
+        /^\]/,
+        /^main/,
+        /^var/,
+        /^~/,
+        /^\(/,
+        /^>=/,
+        /^return/,
+        /^\)/,
+        /^skip/,
+        /^\*/,
+        /^od/,
+        /^>/,
+        /^</,
+        /^-/,
+        /^;/
+]
+ 
+ @@Tok={
 		/^\d+/=> TokNumber,
 		/^[a-zA-Z][\w]*/=>TokId,
 		/^\|\|/=>TokOr, 
@@ -181,7 +232,6 @@ end
         /^array/=>TokArray,
         /^of/=>TokOf,
         /^,/=>TokComma,
-        /^-/=>TokMinus,
         /^begin/=>TokBegin,
         /^true/=>TokTrue,
         /^out/=>TokOut,
@@ -195,7 +245,6 @@ end
         /^\[/=>TokOpBracet,
         /^end/=>TokEnd,
         /^!=/=>TokNotEqual,
-        /^</=>TokLess,
         /^->/=>TokSelect,
         /^<-/=>TokAssign,
         /^value/=>TokValue,
@@ -208,7 +257,6 @@ end
         /^main/=>TokMain,
         /^var/=>TokVar,
         /^~/=>TokNot,
-        /^>/=>TokMore,
         /^\(/=>TokOpenParen,
         /^>=/=>TokMoreEq,
         /^return/=>TokReturn,
@@ -216,6 +264,9 @@ end
         /^skip/=>TokSkip,
         /^\*/=>TokMult,
         /^od/=>TokOd,
+        /^>/=>TokMore,
+        /^</=>TokLess,
+        /^-/=>TokMinus,
         /^;/=>TokDotComma
 }
 
