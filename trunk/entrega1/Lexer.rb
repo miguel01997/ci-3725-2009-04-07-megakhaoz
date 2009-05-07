@@ -24,6 +24,6 @@ class Lexer
     
     def skip n
         @col+=n
-        if @col >= value[line-1][col-1..value[line-1].size].size then nl end
+        if @col > @value[line-1][col-1..@value[line-1].size].size then nl end
     end
 end
