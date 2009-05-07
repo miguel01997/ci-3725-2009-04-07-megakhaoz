@@ -172,7 +172,7 @@ end
  
  @@Tok={  
 		/^\d+/=> TokNumber,
-		/^[a-zA-Z][\w_]+/=>TokId,
+		/^[a-zA-Z][\w]*/=>TokId,
 		/^\|\|/=>TokOr, 
         /^&&/=>TokAnd,
         /^\+/=>TokPlus,
