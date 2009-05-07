@@ -11,8 +11,8 @@ class Lexer
  
     def yylex
 		if (@line== nil ) then return nil end # Si es fin de archivo, chao pescado
-		a=value[line-1][col-1..value[line-1].size]
-		@@Tok.each { |x ,y|	if a.match(x) then b=y.new(col,line,$&);puts "#{b}"; skip $&.length; return b end }
+		a=value[line-1][col-1..value[line-1].size].lstrip
+		@@Tok.each_pair { |x ,y|	if a.match(x) then b=y.new(col,line,$&);puts "#{b}";puts "#{$&.length}"; skip $&.length; return b end }
 		
     end	
     
@@ -24,6 +24,6 @@ class Lexer
     
     def skip n
         @col+=n
-        if @col > value[line-1][col-1..value[line-1].size].size then nl end
+        if @col >= value[line-1][col-1..value[line-1].size].size then nl end
     end
 end

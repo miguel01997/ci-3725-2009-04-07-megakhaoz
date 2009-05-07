@@ -1,0 +1,6 @@
+{El hash no se recorre de forma ordenada->pendiente} (JJ)
+{Skip parece no funcionar correctamente->pendiente} (JJ)
+{Procesamiento de comentarios->pendiente} (Jesus)
+{Procesamiento de Strings->pendiente} (Jesus)
+{ RDOCS->pendiente} (Libre)
+{ Recorrer archivo de forma mas eficiente ? } ( Jesus)
