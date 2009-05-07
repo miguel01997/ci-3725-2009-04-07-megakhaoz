@@ -191,10 +191,8 @@ end
         /^proc/=>TokProc,
         /^\:/=>TokTwoDots,
         /^%/=>TokMod,
-=begin
-
         /^in/=>TokIn,
-        /^[/=>TokOpBracet,
+        /^\[/=>TokOpBracet,
         /^end/=>TokEnd,
         /^!=/=>TokNotEqual,
         /^</=>TokLess,
@@ -206,20 +204,19 @@ end
         /^show/=>TokShow,
         /^as/=>TokAs,
         /^if/=>TokIf,
-        /^]/=>TokCloseBracket,
+        /^\]/=>TokCloseBracket,
         /^main/=>TokMain,
         /^var/=>TokVar,
         /^~/=>TokNot,
         /^>/=>TokMore,
-        /^(/=>TokOpenParen,
+        /^\(/=>TokOpenParen,
         /^>=/=>TokMoreEq,
         /^return/=>TokReturn,
-        /^)/=>TokCloseParen,
+        /^\)/=>TokCloseParen,
         /^skip/=>TokSkip,
-        /^*/=>TokMult,
+        /^\*/=>TokMult,
         /^od/=>TokOd,
         /^;/=>TokDotComma
-=end
 }
 
 
