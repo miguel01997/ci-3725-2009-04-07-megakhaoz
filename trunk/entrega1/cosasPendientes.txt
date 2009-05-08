@@ -1,6 +1,23 @@
-{El hash no se recorre de forma ordenada->pendiente} (JJ)
-{Skip parece no funcionar correctamente->pendiente} (JJ)
-{Procesamiento de comentarios->pendiente} (Jesus)
-{Procesamiento de Strings->pendiente} (Jesus)
-{ RDOCS->pendiente} (Libre)
-{ Recorrer archivo de forma mas eficiente ? } ( Jesus)
+BORRAME:
+{Recorrer archivo de forma mas eficiente->RESUELTO} (Jesus)
+{Skip parece no funcionar correctamente->RESUELTO} (Jesus)
+
+{Procesamiento de comentarios->RESUELTO} (Jesus)
+{Procesamiento de Strings->RESUELTO} (Jesus)
+{El hash no se recorre de forma ordenada->RESUELTO} (JJ)
+
+
+MODIFICAME:
+{RDOCS->pendiente} (JJ)
+{CONSOLA->pendiente} (JJ)
+
+
+
+
+ELIGEME:
+
+{Crear una version de "nl" para consola, similar a la que usa ruby->pendiente} (Libre)
+{Realizar las revisiones de los tokens de manera mas eficiente->pendiente} (Libre)
+{Realizar las revisiones de los comentarios de manera mas eficiente->pendiente} (Libre)
+{Actualizar to_s en los Tokens (de manera que muestre solo lo que tiene que mostrar)->pendiente} (Jesus?)
+

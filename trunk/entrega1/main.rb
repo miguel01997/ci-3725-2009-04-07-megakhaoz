@@ -1,7 +1,7 @@
 require 'Lexer.rb'
 
 def start
-	lex= Lexer.new('lol.txt')
+	lex= Lexer.new('Ejemplos.txt')
 	while ( (x= lex.yylex)!= nil )
 	end
 end

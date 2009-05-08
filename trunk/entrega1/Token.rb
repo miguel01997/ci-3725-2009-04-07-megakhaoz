@@ -26,13 +26,26 @@ end
  
 class TokNumber < Token
     def initialize (a=0, b=0, c=0)
+       if !c.is_a?(Numeric)
+         if c=="0"||c=="-0" then c=0
+         else c=c.to_i
+         end
+         
+         if c==0
+           raise ArgumentError, "El valor del número debe ser un numérico."
+         end         
+       end
+       
        super
-       unless (c.is_a?(Numeric)) then raise ArgumentError, "El valor del nÃºmero debe ser un numÃ©rico." end
+       #unless (c.is_a?(Numeric)) then raise ArgumentError, "El valor del número debe ser un numérico." end
     end
 end
  
 class TokString < Token
     def initialize (a=0, b=0, c=0)
+       c1=c.split "\\\\"
+       c1.each do |c2| c2.gsub!("\\n","\n") end
+       c= c1.join "\\"
        super
        unless (c.is_a?(String)) then raise ArgumentError, "El valor del identificador debe ser un string." end
     end
@@ -173,11 +186,15 @@ end
 class TokString < Token
 end
  
-  
-
+class ERROR < Token
+  def initialize (a=0, b=0, c=0)
+    throw Exception.new('caracter desconocido ('+c.to_s+') en: (L: '+b.to_s+', C: '+a.to_s+')')
+  end
+end
 @@Exps=[
-		/^\-?d+/,
-		/^[a-zA-Z][\w]*/,
+		/^(-?\d+)/,
+    /^"([^\n"]*)"/,
+    /^'([^\n']*)'/,
 		/^\|\|/, 
         /^&&/,
         /^\+/,
@@ -221,13 +238,16 @@ end
         /^>/,
         /^</,
         /^-/,
-        /^;/
+        /^;/,
+        /^([a-zA-Z][\w]*)/,
+        /(.)/
 ]
  
  @@Tok={
-		/^\d+/=> TokNumber,
-		/^[a-zA-Z][\w]*/=>TokId,
-		/^"[^\n"']*"|'[^\n"']*' /=>TokString,
+		/^(-?\d+)/=> TokNumber,
+		/^([a-zA-Z][\w]*)/=>TokId,
+		/^"([^\n"]*)"/=>TokString,
+    /^'([^\n']*)'/=>TokString,
 		/^\|\|/=>TokOr, 
         /^&&/=>TokAnd,
         /^\+/=>TokPlus,
@@ -271,7 +291,8 @@ end
         /^>/=>TokMore,
         /^</=>TokLess,
         /^-/=>TokMinus,
-        /^;/=>TokDotComma
+        /^;/=>TokDotComma,
+        /(.)/=>ERROR
 }
 
 
