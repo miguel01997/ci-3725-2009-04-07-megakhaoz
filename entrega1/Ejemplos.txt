@@ -6,7 +6,7 @@
 
 #1
 {##}
-
+patatas
 2347930
 var	foo,bar,baz:value
 var qux:value
@@ -23,14 +23,17 @@ main skip end
 "soy tu peor pesadilla: \\ \\ \\\\ \\nverdad?"
 
 #3 ERRORES
-"soy
+{#"soy
 un
      string
 muy
   	malo"
+#}
+345{#nla#}ag5r
+{#{#}#} CASO ESPECIAL: {#{#} es un bloque y #} es un comentario
 234srfer
 
-/"[^"\n]*"/
+/"[^\n]*"/
 
 
 

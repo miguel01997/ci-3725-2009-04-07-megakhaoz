@@ -1,0 +1,6 @@
+================
+Jesus (2009/05/07):
+- [tok]ERROR: es un "token" que solo lanza una excepcion, tiene como valor 1 solo caracter de cualquier tipo, y solo puede ocurrir si todo lo demas falla, esto es: si y solo si el usuario escribe algo que no cumple las reglas del lexer
+- revisiones mas largas en TokNumber
+- revisiones particulares para TokString
+================
