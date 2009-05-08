@@ -16,7 +16,7 @@ class Lexer
         @input = (File.open(archivo,'r'))
         @col=1
         @line=1
-	    @buffer= @input.gets
+	@buffer= @input.gets
     end
  
     def yylex
