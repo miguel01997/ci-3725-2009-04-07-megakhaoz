@@ -13,7 +13,7 @@ class Token
     end
     
     def to_s
-        " #{self.class.to_s} #{ @value.to_s } (Linea : #{ @line.to_s } Columna: #{ @col.to_s})"  
+        " #{self.class.to_s} #{ if (@value!= nil) then @value.to_s end } (Linea : #{ @line.to_s } Columna: #{ @col.to_s})"  
     end
 end
 
@@ -26,18 +26,9 @@ end
  
 class TokNumber < Token
     def initialize (a=0, b=0, c=0)
-       if !c.is_a?(Numeric)
-         if c=="0"||c=="-0" then c=0
-         else c=c.to_i
-         end
-         
-         if c==0
-           raise ArgumentError, "El valor del número debe ser un numérico."
-         end         
-       end
-       
+        c=c.to_i
        super
-       #unless (c.is_a?(Numeric)) then raise ArgumentError, "El valor del número debe ser un numérico." end
+       unless (c.is_a?(Numeric)) then raise ArgumentError, "El valor del número debe ser un numérico." end
     end
 end
  
