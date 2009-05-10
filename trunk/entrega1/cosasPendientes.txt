@@ -1,22 +1,14 @@
 BORRAME:
-{Recorrer archivo de forma mas eficiente->RESUELTO} (Jesus)
-{Skip parece no funcionar correctamente->RESUELTO} (Jesus)
-{Actualizar to_s en los Tokens (de manera que muestre solo lo que tiene que mostrar)->RESUELTO} (JJ)
-{Procesamiento de comentarios->RESUELTO} (Jesus)
-{Procesamiento de Strings->RESUELTO} (Jesus)
-{El hash no se recorre de forma ordenada->RESUELTO} (JJ)
 
 
 MODIFICAME:
 {RDOCS->pendiente} (JJ)
 {CONSOLA->pendiente} (JJ)
+{Crear una version de "nl" para consola, similar a la que usa ruby->pendiente} (JJ)
 
 ELIGEME:
-
-{Crear una version de "nl" para consola, similar a la que usa ruby->pendiente} (JJ ?)
-{Realizar las revisiones de los comentarios de manera mas eficiente->pendiente} (Jesus ?)
+{Revisar el caso "{#<seccion comentada>{#}<seccion NO comentada>#}" con novich->pendiente} (Libre)
 
 WHAT ?:
 {Realizar las revisiones de los tokens de manera mas eficiente->pendiente} (Libre)
-
-
+{Realizar las revisiones de los comentarios de manera mas eficiente->pendiente} (Libre)
