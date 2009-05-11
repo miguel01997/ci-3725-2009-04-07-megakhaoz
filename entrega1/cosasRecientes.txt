@@ -4,3 +4,10 @@ Jesus (2009/05/07):
 - revisiones mas largas en TokNumber
 - revisiones particulares para TokString
 ================
+
+================
+Joel (2009/05/11):
+- Asesine a ERROR y lo converti en una excepcion llamada dentro de la funcion yylex. Token error evil, y tratar de comer la expresion
+regular /.*/ tambien esta penado con nuestras cabezas, nuestras redondas y computistas cabezas.
+- Ya hice lo de RDOC, es cuestion de que cuando estemos ladillados adornemos los comentarios para que el codigo parezca inteligente ( porquer khaoz es tan autoindulgente ?)
+================

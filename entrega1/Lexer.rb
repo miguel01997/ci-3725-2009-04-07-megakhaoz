@@ -1,5 +1,8 @@
 require 'Token.rb'
 
+#
+#	La clase lexer lleva control del analisis lexicografico de un archivo y permite obtener tokens con la funcion yylex
+#
 class Lexer
     attr_accessor :col, :line, :value
     
@@ -19,13 +22,20 @@ class Lexer
 	@buffer= @input.gets
     end
  
+	#
+	#	La funcion yylex retorna el siguiente token encontrado en un archivo o nil si se ha llegado al final del mismo
+	#
     def yylex
       eliminar_comentarios #comentar en caso de fallos
 	    if (@buffer == nil ) then return nil end # Si es fin de archivo, chao pescado
 	    @buffer.lstrip!
 	    @@Exps.each { |x| if @buffer.match(x) then b=@@Tok[x].new(col,line,$1);puts "#{b}"; skip $&.length; return b end }
+		unless (@@Exps.include?(@buffer) ) then raise "Caracter inesperado '#{@buffer[/^./]}' encontrado en linea #{line}, columna #{col}." end
     end	
 
+	#
+	#	Elimina comentaios de un archivo
+	#
 	def eliminar_comentarios
 		temp_buffer = ""
     temp_line = @line
@@ -49,13 +59,18 @@ class Lexer
     end
 	end
 
-    
+    #
+	#	La funcion nl permite que el lexer apunte a la siguiente linea del archivo
+	#
     def nl
 	    @col=1
         @line+=1
 	    @buffer=@input.gets
     end
-    
+
+    #
+	#	La funcion skip permite que el lexer avance n columnas en una misma linea del archivo
+	#    
     def skip n=1
         @col+=n
         @buffer= @buffer[n..-1]

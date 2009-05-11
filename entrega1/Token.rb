@@ -1,3 +1,7 @@
+
+#
+#	La clase Token representa un simbolo del lenguaje y guarda informacion sobre el vaor y posicion del mismo, para  el analisis lexicografico de un archivo
+#
 class Token
     @col
     @line
@@ -12,6 +16,9 @@ class Token
         @value= c
     end
     
+	#
+	#	Se reescribe la funcion to_s para imprimir apropiadamente el contenido de un token
+	#
     def to_s
         " #{self.class.to_s} #{ if (@value!= nil) then @value.to_s end } (Linea : #{ @line.to_s } Columna: #{ @col.to_s})"  
     end
@@ -176,16 +183,11 @@ end
 
 class TokString < Token
 end
- 
-class ERROR < Token
-  def initialize (a=0, b=0, c=0)
-    throw Exception.new('caracter desconocido ('+c.to_s+') en: (L: '+b.to_s+', C: '+a.to_s+')')
-  end
-end
+
 @@Exps=[
 		/^(-?\d+)/,
-    /^"([^\n"]*)"/,
-    /^'([^\n']*)'/,
+		/^"([^\n"]*)"/,
+		/^'([^\n']*)'/,
 		/^\|\|/, 
         /^&&/,
         /^\+/,
@@ -230,15 +232,14 @@ end
         /^</,
         /^-/,
         /^;/,
-        /^([a-zA-Z][\w]*)/,
-        /(.)/
+        /^([a-zA-Z][\w]*)/
 ]
  
  @@Tok={
 		/^(-?\d+)/=> TokNumber,
 		/^([a-zA-Z][\w]*)/=>TokId,
 		/^"([^\n"]*)"/=>TokString,
-    /^'([^\n']*)'/=>TokString,
+		/^'([^\n']*)'/=>TokString,
 		/^\|\|/=>TokOr, 
         /^&&/=>TokAnd,
         /^\+/=>TokPlus,
@@ -282,8 +283,7 @@ end
         /^>/=>TokMore,
         /^</=>TokLess,
         /^-/=>TokMinus,
-        /^;/=>TokDotComma,
-        /(.)/=>ERROR
+        /^;/=>TokDotComma
 }
 
 
