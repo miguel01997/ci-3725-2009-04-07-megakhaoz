@@ -1,13 +1,13 @@
 
 #
-#	La clase Token representa un simbolo del lenguaje y guarda informacion sobre el vaor y posicion del mismo, para  el analisis lexicografico de un archivo
+#	La clase Token representa un simbolo del lenguaje y guarda informacion sobre el valor y posicion del mismo, para  el analisis lexicografico de un archivo
 #
 class Token
     @col
     @line
     @value
     
-    attr_accessor :col, :line, :value
+    attr_reader :col, :line, :value
     
     def initialize (a=0, b=0, c=0)
         unless (a.is_a?(Numeric) && b.is_a?(Numeric)) then raise ArgumentError, "La fila y columna deben ser valores numericos." end
