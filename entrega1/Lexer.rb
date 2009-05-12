@@ -7,16 +7,6 @@ class Lexer
     attr_accessor :col, :line, :value
     
     def initialize archivo
-        unless File.exists?(archivo)
-          throw Exception.new("El archivo \"#{prog_fn}\" no existe")
-        end
-        if File.directory?(archivo)
-          throw Exception.new("El archivo \"#{prog_fn}\" es un directorio")
-        end
-        unless File.readable_real?(archivo)
-          throw Exception.new("El archivo \"#{prog_fn}\" no se ha podido abrir para la lectura")
-        end
-        @input = (File.open(archivo,'r'))
         @col=1
         @line=1
 	@buffer= @input.gets
@@ -29,7 +19,7 @@ class Lexer
       eliminar_comentarios #comentar en caso de fallos
 	    if (@buffer == nil ) then return nil end # Si es fin de archivo, chao pescado
 	    @buffer.lstrip!
-	    @@Exps.each { |x| if @buffer.match(x) then b=@@Tok[x].new(col,line,$1);puts "#{b}"; skip $&.length; return b end }
+	    @@Exps.each { |x| if @buffer.match(x) then b=@@Tok[x].new(col,line,$1); skip $&.length; return b end }
 		unless (@@Exps.include?(@buffer) ) then raise "Caracter inesperado '#{@buffer[/^./]}' encontrado en linea #{line}, columna #{col}." end
     end	
 
@@ -53,7 +43,7 @@ class Lexer
           nl
         end
         n=@buffer=~/#\}/
-        if @buffer[0,n].match(/\{#/) then throw Exception.new("Bloques de comentarios anidados") end
+        if @buffer[0,n+1].match(/\{#/) then throw Exception.new("Bloques de comentarios anidados") end
         skip(n+2)
       end 
     end
