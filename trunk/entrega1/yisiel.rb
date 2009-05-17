@@ -22,10 +22,14 @@ def start (archivo)
     throw (:anl)  # Archivo no es de lectura
   end
     
-  lex= Lexer.new(File.open(archivo,'r'))
-	
-  while ( (tok= lex.yylex) != nil )
-  puts tok
+	lex= Lexer.new(File.open(archivo,'r'))
+	tok= ""
+  while ( tok != nil )
+	begin
+		tok= lex.yylex
+		puts tok
+		rescue then puts $@.to_s; lex.skip 1
+	end
   end
 end
 
