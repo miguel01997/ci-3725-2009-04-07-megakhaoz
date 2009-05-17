@@ -1,0 +1,17 @@
+%3zbleh
+#pata pon if fi iffi@
+#~~}'-0blah-0
+#" HOLA 'A ' ' A "
+
+class ErrorCI < RuntimeError
+	attr_reader :col, :line, :value
+    def initialize (a=0, b=0, c=0)
+        @col=a
+        @line= b
+        @value= c
+    end
+	
+    def to_s
+        "Caracter inesperado '#{value}' encontrado en linea #{line}, columna #{col}."  
+    end
+end
