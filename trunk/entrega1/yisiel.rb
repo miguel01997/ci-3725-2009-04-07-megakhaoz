@@ -27,8 +27,8 @@ def start (archivo)
   while ( tok != nil )
 	begin
 		tok= lex.yylex
-		puts tok
-		rescue then puts $@.to_s; lex.skip 1
+		puts tok if tok!= nil
+		rescue then puts $!; lex.skip 1
 	end
   end
 end
