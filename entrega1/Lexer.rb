@@ -21,8 +21,7 @@ class Lexer
 	    if (@buffer == nil ) then return nil end # Si es fin de archivo, chao pescado
 	    @buffer.lstrip!
 	    @@Exps.each { |x| if @buffer.match(x) then b=@@Tok[x].new(col,line,$1); skip $&.length; return b end }
-		unless (@@Exps.include?(@buffer) ) then puts "Caracter inesperado '#{@buffer[/^./]}' encontrado en linea #{line}, columna #{col}.";
-		                                        throw :ci   # Caracter inesperado
+		unless (@@Exps.include?(@buffer) ) then raise "Caracter inesperado '#{@buffer[/^./]}' encontrado en linea #{line}, columna #{col}.";
 		                                   end
     end	
 
