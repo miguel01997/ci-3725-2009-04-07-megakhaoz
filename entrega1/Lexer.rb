@@ -23,7 +23,7 @@ class Lexer
     def yylex
 		eliminar_comentarios 
 	    if (@buffer == nil ) then return nil end # Si es fin de archivo, chao pescado
-	    @@Exps.each { |x| if @buffer.match(x) then b=@@Tok[x].new(col,line,$1); skip $&.length; return b end }
+	    @@Exps.each { |x| if @buffer.match(x) then b=@@Tok[x].new(col,line,$2); skip $1.length; return b end }
 		unless (@@Exps.include?(@buffer) ) then raise "Caracter inesperado '#{@buffer[/^./]}'(#{@buffer[/^./][0]}) encontrado en linea #{line}, columna #{col}.";
 		                                   end
     end	
