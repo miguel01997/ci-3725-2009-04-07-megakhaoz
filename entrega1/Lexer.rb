@@ -43,7 +43,7 @@ class Lexer
       if @buffer=="" then nl end
       if @buffer=="/n" then nl end
       if @buffer=="/r/n" then nl end
-      if @buffer[0,2]=="{#"
+      if @buffer && @buffer[0,2]=="{#"
         skip(2)
         while((@buffer != nil) && !@buffer.match(/#\}/) )
 			if @buffer.match(/\{#/) then raise EcaException.new("Bloques de comentarios anidados (linea: #{@line}, columna: #{@col})") end
