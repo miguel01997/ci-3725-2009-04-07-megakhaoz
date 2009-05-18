@@ -1,4 +1,4 @@
-
+require 'Exception.rb'
 #
 #	La clase Token representa un simbolo del lenguaje y guarda informacion sobre el valor y posicion del mismo, para  el analisis lexicografico de un archivo
 #
