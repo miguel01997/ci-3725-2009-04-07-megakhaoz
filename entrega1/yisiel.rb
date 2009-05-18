@@ -28,7 +28,10 @@ def start (archivo)
 	begin
 		tok= lex.yylex
 		puts tok if tok!= nil
-		rescue then puts $!; lex.skip 1
+		rescue
+			lex.skip 1
+			puts $!
+			
 	end
   end
 end

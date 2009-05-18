@@ -29,6 +29,7 @@ class Lexer
 	#	Elimina comentaios de un archivo
 	#
 	def eliminar_comentarios
+		if (@buffer == nil) then  return 0 end
 		temp_buffer = ""
     temp_line = @line
     while ((@buffer != nil) && ((temp_buffer != @buffer) || (temp_line != @line)))
@@ -65,7 +66,8 @@ class Lexer
 	#    
     def skip n=1
         @col+=n
-        @buffer= @buffer[n..-1]
-        if (@buffer.lstrip=="/n" || @buffer.lstrip=="") then nl end
+		if (@buffer == nil) then  return 0 end
+		@buffer= @buffer[n..-1] 
+		if (@buffer.lstrip=="/n" || @buffer.lstrip=="") then nl end
     end
 end

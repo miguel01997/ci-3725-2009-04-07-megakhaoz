@@ -1,3 +1,6 @@
-%3zbleh
+#%3zbleh
 pata pon if fi iffi@ #hola tipo~
-~~}'-0blah-0
+#~~}'-0blah-0
+
+" HOLA 'A ' ' A "
+"\n \\"
