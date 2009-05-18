@@ -1,16 +1,39 @@
-patatas
-@123vgde%
-{# wertg
-#} etevb
-#%3zbleh
-		pata pon if fi iffi@      		wata#hola tipo~
-	egs5#~~}'-0blah-0
 
-" HOLA 'A ' ' A "
-"\n \
 
-if iffi fi
-gfrehioavrni
-{#{#}
-agrnjinav
-\"
+
+lass Lexer
+    attr_accessor :col, :line, :value
+    
+    def initialize archivo
+        @col=1
+        @line=1
+        @input= archivo
+	    @buffer= @input.gets
+		 if @buffer
+			@max=@buffer.length
+			@buffer.lstrip!
+			@col=@max-@buffer.length+1
+		end
+    end
+ 
+	#
+	#	La funcion yylex retorna el siguiente token encontrado en un archivo o nil si se ha llegado al final del mismo
+	#
+    def yylex
+		eliminar_comentarios 
+	    if (@buffer == nil ) then return nil end # Si es fin de archivo, chao pescado
+	    @@Exps.each { |x| if @buffer.match(x) then b=@@Tok[x].new(col,line,$2); skip $1.length; return b end }
+		unless (@@Exps.include?(@buffer) ) then raise "Caracter inesperado '#{@buffer[/^./]}'(#{@buffer[/^./][0]}) encontrado en linea #{line}, columna #{col}.";
+		                                   end
+    end	
+
+	#
+	#	Elimina comentaios de un archivo
+	#
+	def eliminar_comentarios
+		if (@buffer == nil) then  return 0 end
+		temp_buffer = nil
+    temp_line = @line
+
+
+
