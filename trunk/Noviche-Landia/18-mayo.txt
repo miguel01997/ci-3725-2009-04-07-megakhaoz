@@ -1,0 +1,62 @@
+Lunes 18 de mayo:
+
+LR(1)
+RECURSION POR IZQUIERDA
+RECURSION POR IZQUIERDA
+RECURSION POR IZQUIERDA
+RECURSION POR IZQUIERDA
+RECURSION POR IZQUIERDA
+
+===== MANUAL
+LI
+LSC
+===== AUTO
+LLC
+LR
+
+{i(ci)*dt}
+
+
+E->T+E
+E->T-E
+E->T
+T->F*T
+T->F/T
+T->F
+F->num
+F->(E)
+
+
+E :E+E {$$=AST.node('+',$1,$3)}
+  |E*E {$$=AST.node('*',$1,$3)}
+  |E/E {$$=AST.node('/',$1,$3)}
+  |E-E {$$=AST.node('-',$1,$3)}
+  |(E) {$$ = $2}
+  |num {$$ = AST.node($1,undef,undef)}
+
+
+
+"var,foo,meh :int"
+
+LD : LD D {}
+D : LI : T
+T : int
+  | array of
+LI: id
+  | LI,id
+
+
+
+
+
+
+
+- hacer gramaticas por estructura YA!!!
+- revisar RACC y documentacion MUUUUCHA DOCUMENTACION
+- clases vs tokens
+- errores en Parser -> GAMEOVER "linea,columna, cerca de token"
+- a,b,c :int -> LSC (Lenguaje Sensible al contexto)
+- Tabla de simbolos. {Symbol (int/array/proc), valor}
+- cada procedimiento tiene su tabla de simbolos
+- Arbol sintactico. {a<-42*b} -> {(<-)[(Id(a),(*)[Num(42),Id(b)]]}
+- Ruby -> Arboles en clases.
