@@ -1,0 +1,6 @@
+class SymTable
+{
+	def initialize
+	{
+	}
+}
