@@ -1,0 +1,35 @@
+{#
+   Este es un programa en el lenguaje Yisiel.
+   Su objetivo es probar el compilador y
+   contine varios errores adrede.
+#}
+
+"SECCION DE ERRORES RECUPERABLES:"
+   _&^@!|}{"?\'.`
+   """
+   '''
+
+ 
+"SECCION DE FUNCIONALIDAD DEL LEXER"
+
+"   PRUEBAS DE COMENTARIOS"
+      # Comentario simple
+         #<Tabla_Accii>
+         #{#{#
+      # Comentario Bloque de una Linea
+         {# <Tabla_Accii> #}Los_Comentarios
+      # Comentario Bloque de varias Lineas
+         {#}
+         #}Funcionan
+         
+      
+
+"   PRUEBAS DE STRINGS"
+      "_&^@!|}{?\'.`"
+      '_&^@!|}{"?\.`'
+      
+"SECCION DE ERRORES NO RECUPERABLES"
+   {#Comentario anidado#}           {#{# 
+   {#Comentario anidado/cerrado#}   {#{#}
+   {#Comentario anidado/simple#}    {##{#
+   {#Comentario no cerrado#}        {#  
