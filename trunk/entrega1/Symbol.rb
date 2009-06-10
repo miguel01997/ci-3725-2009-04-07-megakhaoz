@@ -1,6 +1,0 @@
-class Symbol
-{
-	def initialize
-	{
-	}
-}
