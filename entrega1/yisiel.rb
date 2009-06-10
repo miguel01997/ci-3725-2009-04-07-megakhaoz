@@ -58,3 +58,5 @@ if ARGV[0]==nil then
 else
     start ARGV[0]
 end
+
+@@Tok.each { |a,b| print b; print " "}
