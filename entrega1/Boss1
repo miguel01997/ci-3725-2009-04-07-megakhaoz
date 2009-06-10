@@ -4,15 +4,15 @@
    contine varios errores adrede.
 #}
 
-"SECCION DE ERRORES RECUPERABLES:"
+"\n\nSECCION DE ERRORES RECUPERABLES:\n"
    _&^@!|}{"?\'.`
    """
    '''
 
  
-"SECCION DE FUNCIONALIDAD DEL LEXER"
+"\n\nSECCION DE FUNCIONALIDAD DEL LEXER:\n"
 
-"   PRUEBAS DE COMENTARIOS"
+"\n\n   PRUEBAS DE COMENTARIOS\n"
       # Comentario simple
          #<Tabla_Accii>
          #{#{#
@@ -22,13 +22,30 @@
          {#}
          #}Funcionan
          
-      
-
-"   PRUEBAS DE STRINGS"
+"\n\n   PRUEBAS DE STRINGS:\n"
       "_&^@!|}{?\'.`"
       '_&^@!|}{"?\.`'
+      "1 barra:  \"
+      '1 barra:  \'
+      "2 barras: \\"
+      '2 barras: \\'
+      "3 barras: \\\"
+      '3 barras: \\\'
+      "4 barras: \\\\"
+      '4 barras: \\\\'
+      "5 barras: \\\\\"
+      '5 barras: \\\\\'
+      "6 barras: \\\\\\"
+      '6 barras: \\\\\\'
       
-"SECCION DE ERRORES NO RECUPERABLES"
+"\n\n   PRUEBAS DE TOKID:\n"
+      dox odx ifx fix mainx beginx endx truex falsex arrayx ofx valuex procx inx outx asx returnx varx showx skipx
+      DO OD IF FI MAIN BEGIN END TRUE FALSE ARRAY OF VALUE PROC IN OUT AS RETURN VAR SHOW SKIP
+
+"\n\n   PRUEBAS DE PALABRAS RESERVADAS:\n"
+      do od if fi main begin end true false array of value proc in out as return var show skip
+      
+"\n\nSECCION DE ERRORES NO RECUPERABLES:\n"
    {#Comentario anidado#}           {#{# 
    {#Comentario anidado/cerrado#}   {#{#}
    {#Comentario anidado/simple#}    {##{#
