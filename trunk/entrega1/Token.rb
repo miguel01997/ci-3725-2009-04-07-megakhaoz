@@ -41,9 +41,11 @@ end
  
 class TokString < Token
     def initialize (a=0, b=0, c=0)
-       c1=c.split "\\\\"
+       c1= " #{c} "
+       c1=c1.split "\\\\"
        c1.each do |c2| c2.gsub!("\\n","\n") end
-       c= c1.join "\\"
+       c1= c1.join "\\"
+       c = c1[1..-2]
        super
        unless (c.is_a?(String)) then raise ArgumentError, "El valor del identificador debe ser un string." end
     end
