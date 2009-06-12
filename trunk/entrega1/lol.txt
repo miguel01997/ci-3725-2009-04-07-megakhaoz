@@ -4,7 +4,7 @@ var A,B : array of 3
 proc fun (in c, out b)
 as
 	begin
-		b<-a;
+		b<-a+-c;
 		show "hola pepe";
 		return
 	end

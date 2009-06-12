@@ -14,7 +14,7 @@ rule
 
   target: exp
         | /* none */ { result = 0 }
-        ;
+        ;BIMI
 
 	# note result = val[0] by default
   exp: exp '+' exp { result += val[2] }
