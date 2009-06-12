@@ -1,2 +1,4 @@
-var foo,blah : value
-var A,B + :
+var foo,blah : value'´
+var A,B + :%
+
+{#{#

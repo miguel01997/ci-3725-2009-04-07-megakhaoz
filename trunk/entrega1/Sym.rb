@@ -1,3 +1,5 @@
+# clase abstracta simbolo
+# de quien heredan otros simbolos
 class Sym
    @nombre
    @posx #npi
@@ -18,6 +20,7 @@ class Sym
 
 end
 
+# clase de Simbolo para variables enteras
 class SymVar < Sym
    @valor #donde valor es un entero
 
@@ -36,6 +39,7 @@ class SymVar < Sym
    end
 end
 
+# clase de Simbolo para variables arreglo
 class SymArray < Sym
    @valor #donde valor es un arreglo
    def initialize(a,b,c,x)
@@ -54,6 +58,8 @@ class SymArray < Sym
 
 end
 
+
+# clase de Simbolo para procedimiento
 class SymProc < Sym
    @arbol #donde arbol representa la estructura del procedimiento
    @tabla #donde tabla es la tabla de simbolos que DEBE incluir la posicion inicial en el arbol
@@ -102,12 +108,14 @@ class SymProc < Sym
    
 end
 
+# clase simbolo para una variable entero de entrada
 class SymIn < SymVar
    def setValue(x)
       raise "Intento de escritura en una variable de entrada"
    end
 end
 
+# clase simbolo para una variable entero de salida
 class SymOut < SymVar
    def getValue
       raise "Intento de lectura en una variable de salida"

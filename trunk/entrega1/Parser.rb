@@ -9,22 +9,31 @@ require 'racc/parser'
 
 class Parser < Racc::Parser
 
-module_eval <<'..end Parser.y modeval..idfcb1e323a3', 'Parser.y', 5
+module_eval <<'..end Parser.y modeval..idbed39cbd5d', 'Parser.y', 5
 
 def initialize(l)
     @lex =l
 end
 
+def on_error(error_token_id, error_value, value_stack)
+puts "\nError de sintaxis, revisar la sintaxis cerca de los tokens:\n   #{@ultimo_token_leido}"
+puts "   #{@lex.yylex}"
+puts "   #{@lex.yylex}"
+puts "   #{@lex.yylex}"
+
+end
+
 def parser
     do_parse
-enddef on_error (error_token_id, error_value, value_stack) end    
+end    
 
 def next_token
     t= @lex.yylex
+    @ultimo_token_leido = t
     if t== nil then return [false,false] end
     if t!=nil then return [t.class.to_s.to_sym, t.value] end
-end    
-..end Parser.y modeval..idfcb1e323a3
+end
+..end Parser.y modeval..idbed39cbd5d
 
 ##### racc 1.4.5 generates ###
 

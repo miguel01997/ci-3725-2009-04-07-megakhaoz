@@ -1,3 +1,4 @@
+#clase para la tabla de simbolos
 class SymTable
    @table
    
