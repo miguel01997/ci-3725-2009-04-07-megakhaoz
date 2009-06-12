@@ -1,16 +1,2 @@
 var foo,blah : value
-var A,B : array of 3
-
-proc fun (in c, out b)
-as
-	begin
-		b<-a+-c;
-		show "hola pepe";
-		return
-	end
-main
- show foo;
- show "hola pepe";
- 
- skip
-end
+var A,B + :
