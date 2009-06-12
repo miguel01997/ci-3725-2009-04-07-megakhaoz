@@ -1,0 +1,24 @@
+void quicksort(int* izq, int* der) /*Se llama con: quicksort(&vector[0],&vector[n-1]);*/
+{
+	if(der<izq) return;
+	int pivot=*izq;
+	int* ult=der;
+	int* pri=izq;
+ 
+	while(izq<der)
+	{
+		while(*izq<=pivot && izq<der+1) izq++;
+		while(*der>pivot && der>izq-1) der--;
+		if(izq<der) swap(izq,der);
+	}
+	swap(pri,der);
+	quicksort(pri,der-1);
+	quicksort(der+1,ult);
+}
+ 
+void swap(int* a, int* b)
+{
+	int temp=*a;
+	*a=*b;
+	*b=temp;
+}

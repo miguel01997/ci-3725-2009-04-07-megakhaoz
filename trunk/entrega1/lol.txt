@@ -1,4 +1,16 @@
 var foo,blah : value
+var A,B : array of 3
+
+proc fun (in c, out b)
+as
+	begin
+		b<-a;
+		show "hola pepe";
+		return
+	end
 main
- show foo
+ show foo;
+ show "hola pepe";
+ 
+ skip
 end
