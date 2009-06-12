@@ -1,4 +1,5 @@
 require 'Lexer.rb'
+require 'Parser.rb'
 
 #
 #	Programa principal
@@ -30,25 +31,9 @@ def start (archivo)
   end
     
 	lex= Lexer.new(File.open(archivo,'r'))
-	tok= ""
-  while ( tok != nil )
-	begin
-		tok= lex.yylex
-		puts tok	if tok!= nil
-		rescue EcaException, NameError =>e
-			puts e.message
-			return nil
-		rescue EofException, NameError =>e
-			puts e.message
-			return nil
-		rescue StringException, NameError =>e
-			puts e.message
-			return nil
-		rescue
-			lex.skip 1
-			puts $!
-	end
-  end
+	p= Parser.new(lex)
+
+    p.parser
 end
 
 if ARGV[0]==nil then
@@ -58,5 +43,3 @@ if ARGV[0]==nil then
 else
     start ARGV[0]
 end
-
-@@Tok.each { |a,b| print b; print " "}

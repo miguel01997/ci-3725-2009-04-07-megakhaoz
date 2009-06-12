@@ -1,4 +1,4 @@
-if (3<5)
-
-fi
-
+var foo,blah : value
+main
+ show foo
+end

@@ -9,71 +9,89 @@ require 'racc/parser'
 
 class Parser < Racc::Parser
 
+module_eval <<'..end Parser.y modeval..id96d4c6fb12', 'Parser.y', 5
+
+def initialize(l)
+    @lex =l
+end
+
+def parser
+    do_parse
+end
+
+def next_token
+    t= @lex.yylex
+    if t== nil then return [false,false] end
+    if t!=nil then return [t.class.to_s.to_sym, t.value] end
+end
+
+..end Parser.y modeval..id96d4c6fb12
+
 ##### racc 1.4.5 generates ###
 
 racc_reduce_table = [
  0, 0, :racc_error,
- 1, 50, :_reduce_none,
- 2, 50, :_reduce_none,
- 2, 50, :_reduce_none,
- 3, 50, :_reduce_none,
- 1, 53, :_reduce_none,
- 2, 53, :_reduce_none,
- 3, 51, :_reduce_none,
- 4, 52, :_reduce_none,
- 1, 56, :_reduce_none,
- 3, 56, :_reduce_none,
- 1, 57, :_reduce_none,
- 3, 57, :_reduce_none,
- 1, 58, :_reduce_none,
- 3, 58, :_reduce_none,
- 1, 60, :_reduce_none,
- 1, 60, :_reduce_none,
- 1, 60, :_reduce_none,
- 3, 60, :_reduce_none,
- 3, 60, :_reduce_none,
- 3, 60, :_reduce_none,
- 4, 60, :_reduce_none,
- 2, 60, :_reduce_none,
- 2, 60, :_reduce_none,
- 1, 55, :_reduce_none,
- 3, 55, :_reduce_none,
- 3, 63, :_reduce_none,
- 4, 63, :_reduce_none,
- 3, 61, :_reduce_none,
- 5, 61, :_reduce_none,
- 6, 62, :_reduce_none,
- 8, 62, :_reduce_none,
- 7, 54, :_reduce_none,
- 8, 54, :_reduce_none,
- 2, 65, :_reduce_none,
- 2, 65, :_reduce_none,
- 4, 65, :_reduce_none,
- 4, 65, :_reduce_none,
- 1, 59, :_reduce_none,
- 1, 59, :_reduce_none,
- 2, 59, :_reduce_none,
- 2, 59, :_reduce_none,
- 3, 59, :_reduce_none,
- 4, 59, :_reduce_none,
- 2, 66, :_reduce_none,
- 2, 66, :_reduce_none,
- 2, 66, :_reduce_none,
- 2, 66, :_reduce_none,
- 2, 66, :_reduce_none,
- 2, 64, :_reduce_none,
- 1, 64, :_reduce_none,
- 1, 64, :_reduce_none,
- 2, 64, :_reduce_none,
- 2, 64, :_reduce_none,
- 2, 68, :_reduce_none,
- 2, 68, :_reduce_none,
- 2, 67, :_reduce_none,
- 2, 67, :_reduce_none,
- 2, 67, :_reduce_none,
- 2, 67, :_reduce_none,
- 2, 67, :_reduce_none,
- 2, 67, :_reduce_none ]
+ 1, 50, :_reduce_1,
+ 2, 50, :_reduce_2,
+ 2, 50, :_reduce_3,
+ 3, 50, :_reduce_4,
+ 1, 53, :_reduce_5,
+ 2, 53, :_reduce_6,
+ 3, 51, :_reduce_7,
+ 4, 52, :_reduce_8,
+ 1, 56, :_reduce_9,
+ 3, 56, :_reduce_10,
+ 1, 57, :_reduce_11,
+ 3, 57, :_reduce_12,
+ 1, 58, :_reduce_13,
+ 3, 58, :_reduce_14,
+ 1, 60, :_reduce_15,
+ 1, 60, :_reduce_16,
+ 1, 60, :_reduce_17,
+ 3, 60, :_reduce_18,
+ 3, 60, :_reduce_19,
+ 3, 60, :_reduce_20,
+ 4, 60, :_reduce_21,
+ 2, 60, :_reduce_22,
+ 2, 60, :_reduce_23,
+ 1, 55, :_reduce_24,
+ 3, 55, :_reduce_25,
+ 3, 63, :_reduce_26,
+ 4, 63, :_reduce_27,
+ 3, 61, :_reduce_28,
+ 5, 61, :_reduce_29,
+ 6, 62, :_reduce_30,
+ 8, 62, :_reduce_31,
+ 7, 54, :_reduce_32,
+ 8, 54, :_reduce_33,
+ 2, 65, :_reduce_34,
+ 2, 65, :_reduce_35,
+ 4, 65, :_reduce_36,
+ 4, 65, :_reduce_37,
+ 1, 59, :_reduce_38,
+ 1, 59, :_reduce_39,
+ 2, 59, :_reduce_40,
+ 2, 59, :_reduce_41,
+ 3, 59, :_reduce_42,
+ 4, 59, :_reduce_43,
+ 2, 66, :_reduce_44,
+ 2, 66, :_reduce_45,
+ 2, 66, :_reduce_46,
+ 2, 66, :_reduce_47,
+ 2, 66, :_reduce_48,
+ 2, 64, :_reduce_49,
+ 1, 64, :_reduce_50,
+ 1, 64, :_reduce_51,
+ 2, 64, :_reduce_52,
+ 2, 64, :_reduce_53,
+ 2, 68, :_reduce_54,
+ 2, 68, :_reduce_55,
+ 2, 67, :_reduce_56,
+ 2, 67, :_reduce_57,
+ 2, 67, :_reduce_58,
+ 2, 67, :_reduce_59,
+ 2, 67, :_reduce_60,
+ 2, 67, :_reduce_61 ]
 
 racc_reduce_n = 62
 
@@ -377,127 +395,432 @@ Racc_debug_parser = false
 
  # reduce 0 omitted
 
- # reduce 1 omitted
+module_eval <<'.,.,', 'Parser.y', 15
+  def _reduce_1( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 2 omitted
+module_eval <<'.,.,', 'Parser.y', 16
+  def _reduce_2( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 3 omitted
+module_eval <<'.,.,', 'Parser.y', 17
+  def _reduce_3( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 4 omitted
+module_eval <<'.,.,', 'Parser.y', 18
+  def _reduce_4( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 5 omitted
+module_eval <<'.,.,', 'Parser.y', 21
+  def _reduce_5( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 6 omitted
+module_eval <<'.,.,', 'Parser.y', 22
+  def _reduce_6( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 7 omitted
+module_eval <<'.,.,', 'Parser.y', 25
+  def _reduce_7( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 8 omitted
+module_eval <<'.,.,', 'Parser.y', 28
+  def _reduce_8( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 9 omitted
+module_eval <<'.,.,', 'Parser.y', 31
+  def _reduce_9( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 10 omitted
+module_eval <<'.,.,', 'Parser.y', 32
+  def _reduce_10( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 11 omitted
+module_eval <<'.,.,', 'Parser.y', 35
+  def _reduce_11( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 12 omitted
+module_eval <<'.,.,', 'Parser.y', 36
+  def _reduce_12( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 13 omitted
+module_eval <<'.,.,', 'Parser.y', 39
+  def _reduce_13( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 14 omitted
+module_eval <<'.,.,', 'Parser.y', 40
+  def _reduce_14( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 15 omitted
+module_eval <<'.,.,', 'Parser.y', 43
+  def _reduce_15( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 16 omitted
+module_eval <<'.,.,', 'Parser.y', 44
+  def _reduce_16( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 17 omitted
+module_eval <<'.,.,', 'Parser.y', 45
+  def _reduce_17( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 18 omitted
+module_eval <<'.,.,', 'Parser.y', 46
+  def _reduce_18( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 19 omitted
+module_eval <<'.,.,', 'Parser.y', 47
+  def _reduce_19( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 20 omitted
+module_eval <<'.,.,', 'Parser.y', 48
+  def _reduce_20( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 21 omitted
+module_eval <<'.,.,', 'Parser.y', 49
+  def _reduce_21( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 22 omitted
+module_eval <<'.,.,', 'Parser.y', 50
+  def _reduce_22( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 23 omitted
+module_eval <<'.,.,', 'Parser.y', 51
+  def _reduce_23( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 24 omitted
+module_eval <<'.,.,', 'Parser.y', 54
+  def _reduce_24( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 25 omitted
+module_eval <<'.,.,', 'Parser.y', 55
+  def _reduce_25( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 26 omitted
+module_eval <<'.,.,', 'Parser.y', 58
+  def _reduce_26( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 27 omitted
+module_eval <<'.,.,', 'Parser.y', 59
+  def _reduce_27( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 28 omitted
+module_eval <<'.,.,', 'Parser.y', 62
+  def _reduce_28( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 29 omitted
+module_eval <<'.,.,', 'Parser.y', 63
+  def _reduce_29( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 30 omitted
+module_eval <<'.,.,', 'Parser.y', 66
+  def _reduce_30( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 31 omitted
+module_eval <<'.,.,', 'Parser.y', 67
+  def _reduce_31( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 32 omitted
+module_eval <<'.,.,', 'Parser.y', 70
+  def _reduce_32( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 33 omitted
+module_eval <<'.,.,', 'Parser.y', 71
+  def _reduce_33( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 34 omitted
+module_eval <<'.,.,', 'Parser.y', 74
+  def _reduce_34( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 35 omitted
+module_eval <<'.,.,', 'Parser.y', 75
+  def _reduce_35( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 36 omitted
+module_eval <<'.,.,', 'Parser.y', 76
+  def _reduce_36( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 37 omitted
+module_eval <<'.,.,', 'Parser.y', 77
+  def _reduce_37( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 38 omitted
+module_eval <<'.,.,', 'Parser.y', 79
+  def _reduce_38( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 39 omitted
+module_eval <<'.,.,', 'Parser.y', 80
+  def _reduce_39( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 40 omitted
+module_eval <<'.,.,', 'Parser.y', 81
+  def _reduce_40( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 41 omitted
+module_eval <<'.,.,', 'Parser.y', 82
+  def _reduce_41( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 42 omitted
+module_eval <<'.,.,', 'Parser.y', 83
+  def _reduce_42( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 43 omitted
+module_eval <<'.,.,', 'Parser.y', 84
+  def _reduce_43( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 44 omitted
+module_eval <<'.,.,', 'Parser.y', 86
+  def _reduce_44( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 45 omitted
+module_eval <<'.,.,', 'Parser.y', 87
+  def _reduce_45( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 46 omitted
+module_eval <<'.,.,', 'Parser.y', 88
+  def _reduce_46( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 47 omitted
+module_eval <<'.,.,', 'Parser.y', 89
+  def _reduce_47( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 48 omitted
+module_eval <<'.,.,', 'Parser.y', 90
+  def _reduce_48( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 49 omitted
+module_eval <<'.,.,', 'Parser.y', 92
+  def _reduce_49( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 50 omitted
+module_eval <<'.,.,', 'Parser.y', 93
+  def _reduce_50( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 51 omitted
+module_eval <<'.,.,', 'Parser.y', 94
+  def _reduce_51( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 52 omitted
+module_eval <<'.,.,', 'Parser.y', 95
+  def _reduce_52( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 53 omitted
+module_eval <<'.,.,', 'Parser.y', 96
+  def _reduce_53( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 54 omitted
+module_eval <<'.,.,', 'Parser.y', 98
+  def _reduce_54( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 55 omitted
+module_eval <<'.,.,', 'Parser.y', 99
+  def _reduce_55( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 56 omitted
+module_eval <<'.,.,', 'Parser.y', 101
+  def _reduce_56( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 57 omitted
+module_eval <<'.,.,', 'Parser.y', 102
+  def _reduce_57( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 58 omitted
+module_eval <<'.,.,', 'Parser.y', 103
+  def _reduce_58( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 59 omitted
+module_eval <<'.,.,', 'Parser.y', 104
+  def _reduce_59( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 60 omitted
+module_eval <<'.,.,', 'Parser.y', 105
+  def _reduce_60( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
- # reduce 61 omitted
+module_eval <<'.,.,', 'Parser.y', 106
+  def _reduce_61( val, _values, result )
+puts 1
+   result
+  end
+.,.,
 
  def _reduce_none( val, _values, result )
   result
