@@ -5,12 +5,64 @@ require 'Parser.rb'
 #	Programa principal
 #
 
+
+#
+#	Funcion que determina si hay algún error lexicográfico
+#
+def checaLexico(archivo)
+        lexor= Lexer.new(File.open(archivo,'r'))
+        tok= ""
+        while ( tok != nil )
+        begin
+                tok= lexor.yylex
+                #puts tok if tok!= nil
+                rescue EcaException, NameError =>e
+                        
+                        return 1
+                rescue EofException, NameError =>e
+                        
+                        return 1
+                rescue StringException, NameError =>e
+                        
+                        return 1
+                rescue
+                        return 1
+                        
+        end
+        end
+        return 0
+end
+
+#
+#	Funcion que imprime errores lexicográficos
+#
+def imprimeLexErrors(archivo)
+        lexor= Lexer.new(File.open(archivo,'r'))
+        tok= ""
+        while ( tok != nil )
+        begin
+                tok= lexor.yylex
+                #puts tok if tok!= nil
+                rescue EcaException, NameError =>e
+                        puts e.message
+                        return nil
+                rescue EofException, NameError =>e
+                        puts e.message
+                        return nil
+                rescue StringException, NameError =>e
+                        puts e.message
+                        return nil
+                rescue
+                        lexor.skip 1
+                        puts $!
+                        
+        end
+        end
+end
+
 #
 #	Funcion principal que llama a la consola y a lexer para procesar bien archivos o bien comandos introducidos por el usuario
 #
-
-
-
 def start (archivo)
   
   unless File.exists?(archivo) then
@@ -29,6 +81,8 @@ def start (archivo)
     #throw (:anl)  # Archivo no es de lectura
 	 return nil
   end
+    
+    if (checaLexico(archivo)==1) then imprimeLexErrors(archivo); return 1 end 
     
 	lex= Lexer.new(File.open(archivo,'r'))
 	p= Parser.new(lex)
