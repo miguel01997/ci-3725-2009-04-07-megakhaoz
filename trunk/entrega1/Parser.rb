@@ -9,7 +9,7 @@ require 'racc/parser'
 
 class Parser < Racc::Parser
 
-module_eval <<'..end Parser.y modeval..idd97f655205', 'Parser.y', 5
+module_eval <<'..end Parser.y modeval..idfcb1e323a3', 'Parser.y', 5
 
 def initialize(l)
     @lex =l
@@ -24,7 +24,7 @@ def next_token
     if t== nil then return [false,false] end
     if t!=nil then return [t.class.to_s.to_sym, t.value] end
 end    
-..end Parser.y modeval..idd97f655205
+..end Parser.y modeval..idfcb1e323a3
 
 ##### racc 1.4.5 generates ###
 
