@@ -1,0 +1,13 @@
+{#
+   Este es un programa en el lenguaje Yisiel.
+   Su objetivo es probar Parser con un programa completo
+#}
+
+var a1:value
+var a2,a3,a4,a5,a6:value
+var b1:array of 10
+var b2,b3,b4,b5,b6:array of 20
+
+main
+skip
+end
