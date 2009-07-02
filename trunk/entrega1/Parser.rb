@@ -9,7 +9,7 @@ require 'racc/parser'
 
 class Parser < Racc::Parser
 
-module_eval <<'..end Parser.y modeval..idbed39cbd5d', 'Parser.y', 5
+module_eval <<'..end Parser.y modeval..idb85d11e0be', 'Parser.y', 5
 
 def initialize(l)
     @lex =l
@@ -33,7 +33,7 @@ def next_token
     if t== nil then return [false,false] end
     if t!=nil then return [t.class.to_s.to_sym, t.value] end
 end
-..end Parser.y modeval..idbed39cbd5d
+..end Parser.y modeval..idb85d11e0be
 
 ##### racc 1.4.5 generates ###
 
@@ -484,553 +484,553 @@ Racc_debug_parser = false
 
  # reduce 0 omitted
 
-module_eval <<'.,.,', 'Parser.y', 15
+module_eval <<'.,.,', 'Parser.y', 14
   def _reduce_1( val, _values, result )
 puts "START -> MAIN"
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 16
+module_eval <<'.,.,', 'Parser.y', 15
   def _reduce_2( val, _values, result )
 puts "START -> VAR MAIN"
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 17
+module_eval <<'.,.,', 'Parser.y', 16
   def _reduce_3( val, _values, result )
 puts "START -> PROC MAIN"
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 18
+module_eval <<'.,.,', 'Parser.y', 17
   def _reduce_4( val, _values, result )
 puts "START -> VAR PROC MAIN"
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 20
+module_eval <<'.,.,', 'Parser.y', 19
   def _reduce_5( val, _values, result )
 puts "VAR -> var LIST_ID : TIPO"; return "var #{val[1]} : #{val[3]}"
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 21
+module_eval <<'.,.,', 'Parser.y', 20
   def _reduce_6( val, _values, result )
 puts "VAR -> VAR var LIST_ID : TIPO"; return "#{val[2]}, #{val[4]}"
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 23
+module_eval <<'.,.,', 'Parser.y', 22
   def _reduce_7( val, _values, result )
 puts "LIST_ID -> TokId(#{val[0]})"; return val[0]
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 24
+module_eval <<'.,.,', 'Parser.y', 23
   def _reduce_8( val, _values, result )
 puts "LIST_ID -> LIST_ID , TokId(#{val[2]})"; return "#{val[0]}, #{val[2]}"
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 26
+module_eval <<'.,.,', 'Parser.y', 25
   def _reduce_9( val, _values, result )
 puts "TIPO -> value"; return "value"
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 27
+module_eval <<'.,.,', 'Parser.y', 26
   def _reduce_10( val, _values, result )
 puts "TIPO -> array of TokNum(#{val[2]})"; return "array of #{val[2]}"
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 29
+module_eval <<'.,.,', 'Parser.y', 28
   def _reduce_11( val, _values, result )
 puts "PROC -> PROCEDIMIENTO"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 30
+module_eval <<'.,.,', 'Parser.y', 29
   def _reduce_12( val, _values, result )
 puts "PROC -> PROC PROCEDIMIENTO"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 32
+module_eval <<'.,.,', 'Parser.y', 31
   def _reduce_13( val, _values, result )
 puts "PROCEDIMENTO -> proc TokId(#{val[1]}) ( PARAMETRO ) as P_INSTRUCCION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 33
+module_eval <<'.,.,', 'Parser.y', 32
   def _reduce_14( val, _values, result )
 puts "PROCEDIMENTO -> PROCEDIMIENTO proc TokId(#{val[1]}) ( PARAMETRO ) as P_INSTRUCCION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 35
+module_eval <<'.,.,', 'Parser.y', 34
   def _reduce_15( val, _values, result )
 puts "PARAMETRO -> in TokId(#{val[1]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 36
+module_eval <<'.,.,', 'Parser.y', 35
   def _reduce_16( val, _values, result )
 puts "PARAMETRO -> out TokId(#{val[1]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 37
+module_eval <<'.,.,', 'Parser.y', 36
   def _reduce_17( val, _values, result )
 puts "PARAMETRO -> PARAMETRO , in TokId(#{val[1]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 38
+module_eval <<'.,.,', 'Parser.y', 37
   def _reduce_18( val, _values, result )
 puts "PARAMETRO -> PARAMETRO , out TokId(#{val[1]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 40
+module_eval <<'.,.,', 'Parser.y', 39
   def _reduce_19( val, _values, result )
 puts "P_INSTRUCCION -> skip"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 41
+module_eval <<'.,.,', 'Parser.y', 40
   def _reduce_20( val, _values, result )
 puts "P_INSTRUCCION -> return"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 42
+module_eval <<'.,.,', 'Parser.y', 41
   def _reduce_21( val, _values, result )
 puts "P_INSTRUCCION -> ASIGNACION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 43
+module_eval <<'.,.,', 'Parser.y', 42
   def _reduce_22( val, _values, result )
 puts "P_INSTRUCCION -> ASIGNARRAY"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 44
+module_eval <<'.,.,', 'Parser.y', 43
   def _reduce_23( val, _values, result )
 puts "P_INSTRUCCION -> begin LIST_P_INST end"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 45
+module_eval <<'.,.,', 'Parser.y', 44
   def _reduce_24( val, _values, result )
 puts "P_INSTRUCCION -> if P_SELECCION fi"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 46
+module_eval <<'.,.,', 'Parser.y', 45
   def _reduce_25( val, _values, result )
 puts "P_INSTRUCCION -> do P_SELECCION od"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 47
+module_eval <<'.,.,', 'Parser.y', 46
   def _reduce_26( val, _values, result )
 puts "P_INSTRUCCION -> TokId(#{val[0]}) ( LIST_EXPR )"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 48
+module_eval <<'.,.,', 'Parser.y', 47
   def _reduce_27( val, _values, result )
 puts "P_INSTRUCCION -> show EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 49
+module_eval <<'.,.,', 'Parser.y', 48
   def _reduce_28( val, _values, result )
 puts "P_INSTRUCCION -> show TokString(#{val[1]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 51
+module_eval <<'.,.,', 'Parser.y', 50
   def _reduce_29( val, _values, result )
 puts "LIST_P_INST -> P_INSTRUCCION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 52
+module_eval <<'.,.,', 'Parser.y', 51
   def _reduce_30( val, _values, result )
 puts "LIST_P_INST -> LIST_P_INST ; P_INSTRUCCION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 54
+module_eval <<'.,.,', 'Parser.y', 53
   def _reduce_31( val, _values, result )
 puts "P_SELECCION -> GUARDIA -> P_INSTRUCCION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 55
+module_eval <<'.,.,', 'Parser.y', 54
   def _reduce_32( val, _values, result )
 puts "P_SELECCION -> P_SELECCION GUARDIA -> P_INSTRUCCION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 57
+module_eval <<'.,.,', 'Parser.y', 56
   def _reduce_33( val, _values, result )
 puts "ASIGNACION -> TokId(#{val[0]}) <- EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 58
+module_eval <<'.,.,', 'Parser.y', 57
   def _reduce_34( val, _values, result )
 puts "ASIGNACION -> TokId(#{val[0]}) , ASIGNACION , EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 60
+module_eval <<'.,.,', 'Parser.y', 59
   def _reduce_35( val, _values, result )
 puts "ASIGNARRAY -> TokId(#{val[0]}) [ EXPRESION ] <- EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 61
+module_eval <<'.,.,', 'Parser.y', 60
   def _reduce_36( val, _values, result )
 puts "ASIGNARRAY -> TokId(#{val[0]}) [ EXPRESION ] , ASIGNARRAY , EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 63
+module_eval <<'.,.,', 'Parser.y', 62
   def _reduce_37( val, _values, result )
 puts "EXPRESION -> TokNum(#{val[0]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 64
+module_eval <<'.,.,', 'Parser.y', 63
   def _reduce_38( val, _values, result )
 puts "EXPRESION -> TokId(#{val[0]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 65
+module_eval <<'.,.,', 'Parser.y', 64
   def _reduce_39( val, _values, result )
 puts "EXPRESION -> $(#{val[1]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 66
+module_eval <<'.,.,', 'Parser.y', 65
   def _reduce_40( val, _values, result )
 puts "EXPRESION -> EXPRESION EXPROPER"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 67
+module_eval <<'.,.,', 'Parser.y', 66
   def _reduce_41( val, _values, result )
 puts "EXPRESION -> ( EXPRESION )"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 68
+module_eval <<'.,.,', 'Parser.y', 67
   def _reduce_42( val, _values, result )
 puts "EXPRESION -> TokId(#{val[0]}) [EXPRESION]"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 69
+module_eval <<'.,.,', 'Parser.y', 68
   def _reduce_43( val, _values, result )
 puts "EXPRESION -> - TokNum(#{val[1]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 70
+module_eval <<'.,.,', 'Parser.y', 69
   def _reduce_44( val, _values, result )
 puts "EXPRESION -> - TokId(#{val[1]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 71
+module_eval <<'.,.,', 'Parser.y', 70
   def _reduce_45( val, _values, result )
 puts "EXPRESION -> - ( EXPRESION )"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 74
+module_eval <<'.,.,', 'Parser.y', 73
   def _reduce_46( val, _values, result )
 puts "EXPROPER -> * EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 75
+module_eval <<'.,.,', 'Parser.y', 74
   def _reduce_47( val, _values, result )
 puts "EXPROPER -> - EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 76
+module_eval <<'.,.,', 'Parser.y', 75
   def _reduce_48( val, _values, result )
 puts "EXPROPER -> + EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 77
+module_eval <<'.,.,', 'Parser.y', 76
   def _reduce_49( val, _values, result )
 puts "EXPROPER -> / EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 78
+module_eval <<'.,.,', 'Parser.y', 77
   def _reduce_50( val, _values, result )
 puts "EXPROPER -> % EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 80
+module_eval <<'.,.,', 'Parser.y', 79
   def _reduce_51( val, _values, result )
 puts "MAIN -> main LIST_INST end"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 82
+module_eval <<'.,.,', 'Parser.y', 81
   def _reduce_52( val, _values, result )
 puts "INSTRUCCION -> skip"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 83
+module_eval <<'.,.,', 'Parser.y', 82
   def _reduce_53( val, _values, result )
 puts "INSTRUCCION -> ASIGNACION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 84
+module_eval <<'.,.,', 'Parser.y', 83
   def _reduce_54( val, _values, result )
 puts "INSTRUCCION -> ASIGNARRAY"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 85
+module_eval <<'.,.,', 'Parser.y', 84
   def _reduce_55( val, _values, result )
 puts "INSTRUCCION -> begin LIST_INST end"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 86
+module_eval <<'.,.,', 'Parser.y', 85
   def _reduce_56( val, _values, result )
 puts "INSTRUCCION -> if SELECCION fi"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 87
+module_eval <<'.,.,', 'Parser.y', 86
   def _reduce_57( val, _values, result )
 puts "INSTRUCCION -> do SELECCION od"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 88
+module_eval <<'.,.,', 'Parser.y', 87
   def _reduce_58( val, _values, result )
 puts "INSTRUCCION -> TokId(#{val[0]}) ( LIST_EXPR )"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 89
+module_eval <<'.,.,', 'Parser.y', 88
   def _reduce_59( val, _values, result )
 puts "INSTRUCCION -> show EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 90
+module_eval <<'.,.,', 'Parser.y', 89
   def _reduce_60( val, _values, result )
 puts "INSTRUCCION -> show TokString(#{val[1]})"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 92
+module_eval <<'.,.,', 'Parser.y', 91
   def _reduce_61( val, _values, result )
 puts "LIST_INST -> INSTRUCCION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 93
+module_eval <<'.,.,', 'Parser.y', 92
   def _reduce_62( val, _values, result )
 puts "LIST_INST -> LIST_INST ; INSTRUCCION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 95
+module_eval <<'.,.,', 'Parser.y', 94
   def _reduce_63( val, _values, result )
 puts "SELECCION -> GUARDIA -> INSTRUCCION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 96
+module_eval <<'.,.,', 'Parser.y', 95
   def _reduce_64( val, _values, result )
 puts "SELECCION -> SELECCION GUARDIA -> INSTRUCCION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 98
+module_eval <<'.,.,', 'Parser.y', 97
   def _reduce_65( val, _values, result )
 puts "LIST_EXPR -> EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 99
+module_eval <<'.,.,', 'Parser.y', 98
   def _reduce_66( val, _values, result )
 puts "LIST_EXPR -> LIST_EXPR ; EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 101
+module_eval <<'.,.,', 'Parser.y', 100
   def _reduce_67( val, _values, result )
 puts "GUARDIA -> EXPRESION COMPARE "; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 102
+module_eval <<'.,.,', 'Parser.y', 101
   def _reduce_68( val, _values, result )
 puts "GUARDIA -> true"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 103
+module_eval <<'.,.,', 'Parser.y', 102
   def _reduce_69( val, _values, result )
 puts "GUARDIA -> false"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 104
+module_eval <<'.,.,', 'Parser.y', 103
   def _reduce_70( val, _values, result )
 puts "GUARDIA -> GUARDIA GUARDIAOPER"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 105
+module_eval <<'.,.,', 'Parser.y', 104
   def _reduce_71( val, _values, result )
 puts "GUARDIA -> ~ GUARDIA"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 107
+module_eval <<'.,.,', 'Parser.y', 106
   def _reduce_72( val, _values, result )
 puts "GUARDIAOPER -> || GUARDIA "; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 108
+module_eval <<'.,.,', 'Parser.y', 107
   def _reduce_73( val, _values, result )
 puts "GUARDIAOPER -> && GUARDIA"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 110
+module_eval <<'.,.,', 'Parser.y', 109
   def _reduce_74( val, _values, result )
 puts "COMPARE -> < EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 111
+module_eval <<'.,.,', 'Parser.y', 110
   def _reduce_75( val, _values, result )
 puts "COMPARE -> >= EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 112
+module_eval <<'.,.,', 'Parser.y', 111
   def _reduce_76( val, _values, result )
 puts "COMPARE -> <= EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 113
+module_eval <<'.,.,', 'Parser.y', 112
   def _reduce_77( val, _values, result )
 puts "COMPARE -> > EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 114
+module_eval <<'.,.,', 'Parser.y', 113
   def _reduce_78( val, _values, result )
 puts "COMPARE -> = EXPRESION"; return ""
    result
   end
 .,.,
 
-module_eval <<'.,.,', 'Parser.y', 115
+module_eval <<'.,.,', 'Parser.y', 114
   def _reduce_79( val, _values, result )
 puts "COMPARE -> != EXPRESION"; return ""
    result

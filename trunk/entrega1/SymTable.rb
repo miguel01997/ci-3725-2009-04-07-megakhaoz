@@ -5,7 +5,16 @@ class SymTable
 	def initialize
       @table={}
 	end
+	
+	def to_s
+      "#{@table.to_s}" 
+   end
    
+	def insertVars(a,b) # retornando el Symbol recien insertado o nil.
+		puts a
+		puts b
+   end
+	
    def insert(symbol) # retornando el Symbol recien insertado o nil.
       name=symbol.name
       if (self.find(name)) then raise "El simbolo de nombre '#{name}' ya existe" end
