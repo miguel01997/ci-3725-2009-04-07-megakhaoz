@@ -74,7 +74,8 @@ class SymProc < Sym
       @pila_t = []
       super
    end
-   
+ 
+# SI NO SE USAN LAS PILAS, TODAS ESTAS FUNCIONES ESTARAN DEPRECADAS
    def open
       @pila_a.push @arbol
       @pila_t.push @tabla
@@ -105,7 +106,6 @@ class SymProc < Sym
       @pila_a.pop
       @pila_a.push x
    end
-   
 end
 
 # clase simbolo para una variable entero de entrada

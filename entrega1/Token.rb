@@ -186,6 +186,9 @@ end
 class TokString < Token
 end
 
+class TokPipe < Token
+end
+
 @@Exps=[
         /^("([^\n"]*)")/,
         /^('([^\n']*)')/,
@@ -234,6 +237,7 @@ end
         /^(-)/,
         /^((-?\d+))/,
         /^(;)/,
+		  /^(\|)/,
       /^(([a-zA-Z][\w]*))/
 
 ]
@@ -286,7 +290,8 @@ end
         /^(>)/=>TokMore,
         /^(<)/=>TokLess,
         /^(-)/=>TokMinus,
-        /^(;)/=>TokDotComma
+        /^(;)/=>TokDotComma,
+		  /^(\|)/=>TokPipe
 }
 
 
