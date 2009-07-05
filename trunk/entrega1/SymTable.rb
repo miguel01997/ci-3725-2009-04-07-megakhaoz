@@ -27,7 +27,7 @@ class SymTable
    
    def insertVars(a,b) # inserta una lista de variables en la tabla (int/array)
       if b<0 
-         a.each do |x| insert(SymVar.new(x.value,x.line,x.col,0)) end 
+         a.each do |x| insert(SymVar.new(x.value,x.line,x.col)) end 
       else
          a.each do |x| insert(SymArray.new(x.value,x.line,x.col,b)) end 
       end

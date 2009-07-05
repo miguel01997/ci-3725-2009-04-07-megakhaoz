@@ -7,13 +7,13 @@
 require 'racc/parser'
 
 
-#require 'AST.rb'
+require 'AST.rb'
 require 'SymTable.rb'
 require 'Sym.rb'
 
 class Parser < Racc::Parser
 
-module_eval <<'..end Parser.y modeval..ide7a4ce2a90', 'Parser.y', 13
+module_eval <<'..end Parser.y modeval..id5018e3379e', 'Parser.y', 13
 @ultimo_token_leido
 @tabla_de_simbolos
 def initialize(l)
@@ -39,7 +39,7 @@ def next_token
    if t== nil then return [false,false] end
    if t!=nil then return [t.class.to_s.to_sym, t.value] end
 end
-..end Parser.y modeval..ide7a4ce2a90
+..end Parser.y modeval..id5018e3379e
 
 ##### racc 1.4.5 generates ###
 
@@ -584,14 +584,14 @@ puts "PROCEDIMENTO -> PROCEDIMIENTO proc TokId(#{val[1]}) ( PARAMETRO ) as P_INS
 
 module_eval <<'.,.,', 'Parser.y', 37
   def _reduce_15( val, _values, result )
-puts "PARAMETRO -> in TokId(#{val[1]})"; return [true, val[1]]
+puts "PARAMETRO -> in TokId(#{val[1]})"; return [true, @ultimo_token_leido]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 38
   def _reduce_16( val, _values, result )
-puts "PARAMETRO -> out TokId(#{val[1]})"; return [false, val[1]]
+puts "PARAMETRO -> out TokId(#{val[1]})"; return [false, @ultimo_token_leido]
    result
   end
 .,.,
@@ -738,21 +738,21 @@ puts "ASIGNARRAY -> TokId(#{val[0]}) [ EXPRESION ] , ASIGNARRAY , EXPRESION"; re
 
 module_eval <<'.,.,', 'Parser.y', 65
   def _reduce_37( val, _values, result )
-puts "EXPRESION -> TokNum(#{val[0]})"; return ""
+puts "EXPRESION -> TokNum(#{val[0]})"; return ASTNumber.new(val[0])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 66
   def _reduce_38( val, _values, result )
-puts "EXPRESION -> TokId(#{val[0]})"; return ""
+puts "EXPRESION -> TokId(#{val[0]})"; return ASTId.new(val[0])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 67
   def _reduce_39( val, _values, result )
-puts "EXPRESION -> $(#{val[1]})"; return ""
+puts "EXPRESION -> $(#{val[1]})"; return ASTArraySize.new(val[1])
    result
   end
 .,.,
@@ -948,91 +948,91 @@ puts "LIST_EXPR -> LIST_EXPR ; EXPRESION"; return ""
 
 module_eval <<'.,.,', 'Parser.y', 103
   def _reduce_67( val, _values, result )
-puts "GUARDIA -> EXPRESION COMPARE "; return ""
+puts "GUARDIA -> EXPRESION COMPARE "; return ASTBoolOp.new(val[0],val[1][1],val[1][0])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 104
   def _reduce_68( val, _values, result )
-puts "GUARDIA -> true"; return ""
+puts "GUARDIA -> true"; return ASTBoolCte.new(true)
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 105
   def _reduce_69( val, _values, result )
-puts "GUARDIA -> false"; return ""
+puts "GUARDIA -> false"; return ASTBoolCte.new(false)
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 106
   def _reduce_70( val, _values, result )
-puts "GUARDIA -> GUARDIA GUARDIAOPER"; return ""
+puts "GUARDIA -> GUARDIA GUARDIAOPER"; return ASTBoolOp.new(val[0],val[1][1],val[1][0])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 107
   def _reduce_71( val, _values, result )
-puts "GUARDIA -> ~ GUARDIA"; return ""
+puts "GUARDIA -> ~ GUARDIA"; return ASTBoolNeg(val[1])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 109
   def _reduce_72( val, _values, result )
-puts "GUARDIAOPER -> || GUARDIA "; return ""
+puts "GUARDIAOPER -> || GUARDIA "; return ["||",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 110
   def _reduce_73( val, _values, result )
-puts "GUARDIAOPER -> && GUARDIA"; return ""
+puts "GUARDIAOPER -> && GUARDIA"; return ["&&",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 112
   def _reduce_74( val, _values, result )
-puts "COMPARE -> < EXPRESION"; return ""
+puts "COMPARE -> < EXPRESION"; return ["<",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 113
   def _reduce_75( val, _values, result )
-puts "COMPARE -> >= EXPRESION"; return ""
+puts "COMPARE -> >= EXPRESION"; return [">=",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 114
   def _reduce_76( val, _values, result )
-puts "COMPARE -> <= EXPRESION"; return ""
+puts "COMPARE -> <= EXPRESION"; return ["<=",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 115
   def _reduce_77( val, _values, result )
-puts "COMPARE -> > EXPRESION"; return ""
+puts "COMPARE -> > EXPRESION"; return [">",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 116
   def _reduce_78( val, _values, result )
-puts "COMPARE -> = EXPRESION"; return ""
+puts "COMPARE -> = EXPRESION"; return ["==",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 117
   def _reduce_79( val, _values, result )
-puts "COMPARE -> != EXPRESION"; return ""
+puts "COMPARE -> != EXPRESION"; return ["!=",val[1]]
    result
   end
 .,.,

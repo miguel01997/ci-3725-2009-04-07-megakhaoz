@@ -262,10 +262,40 @@ end
 
 # Arbol para la instruccion  bloque
 class ASTBlock < ASTStmt
+
+   @instrucciones
+	attr_reader :instrucciones
+	
+	def initialize()
+		@instrucciones=[]
+   end
+	
+	def check(tabla)
+		return @instrucciones.each{|x| print x, " -- " }
+	end
+
+	def run(tabla)
+     @instrucciones.each{|x| x.run(tabla)}
+	end
 end
 
 # Arbol para la instruccion  bloque principal
 class ASTMainBlock < ASTStmt
+
+   @instrucciones
+	attr_reader :instrucciones
+	
+	def initialize()
+		@instrucciones=[]
+   end
+	
+	def check(tabla)
+		return @instrucciones.each{|x| print x, " -- " }
+	end
+
+	def run(tabla)
+     @instrucciones.each{|x| x.run(tabla)}
+	end
 end
 
 # Arbol para la instruccion  repeticion
@@ -274,4 +304,8 @@ end
 
 # Arbol para la instruccion seleccion  
 class ASTSelect < ASTStmt
+end
+
+# Arbol para procedimientos
+class ASTProc < ASTStmt
 end
