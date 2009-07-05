@@ -9,5 +9,8 @@ var b1:array of 10
 var b2,b3,b4,b5,b6:array of 20
 
 main
-skip
+skip;
+if true -> skip
+| false -> skip
+fi
 end
