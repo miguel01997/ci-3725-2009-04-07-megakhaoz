@@ -3,7 +3,7 @@ require 'SymTable.rb'
 class AST
    @val
 	
-	attr_reader :val
+	attr_accessor :val
 
 	def initialize(c)
 		@val=c
@@ -38,7 +38,7 @@ end
 # AST para guardar identificadores.
 class ASTId < ASTMath
 	@nombre
-	attr_reader :nombre
+	attr_accessor :nombre
 	
 	def initialize(c)
 		@nombre=c
@@ -58,7 +58,7 @@ end
 # AST para obtener el tamanyo de un arreglo.
 class ASTArraySize < ASTMath
 	@nombre
-	attr_reader :nombre
+	attr_accessor :nombre
 	
 	def initialize(c)
 		@nombre=c
@@ -79,7 +79,7 @@ end
 class ASTArrayId < ASTMath
 	@nombre
    @indice
-	attr_reader :nombre, :indice
+	attr_accessor :nombre, :indice
 	
 	def initialize(a,b)
 		@nombre=a
@@ -104,7 +104,7 @@ class ASTMathOp < ASTMath
    @der
    @op
 	
-	attr_reader :izq, :der, :op
+	attr_accessor :izq, :der, :op
 	
 	def initialize (a=0, b=0, c=0)
       @izq=a
@@ -142,7 +142,7 @@ end
 
 class ASTBoolNeg < ASTBool
 	@expr
-	attr_reader :expr
+	attr_accessor :expr
 	
 	def initialize(c)
 		unless ( c.is_a?(ASTBool) ) then raise ArgumentError, "Solo puede aplicarse negacion a una expresion logica." end
@@ -162,7 +162,7 @@ class ASTBoolOp < ASTBool
    @der
    @op
 	
-	attr_reader :izq, :der, :op
+	attr_accessor :izq, :der, :op
 	
 	def initialize (a=0, b=0, c=0)
       @izq=a
@@ -216,7 +216,7 @@ end
 class ASTAssign < ASTStmt
 	@nombre
    @asignacion
-	attr_reader :nombre, :asignacion
+	attr_accessor :nombre, :asignacion
 	
 	def initialize(a,b)
 		@nombre=a
@@ -240,7 +240,7 @@ class ASTArrayAssign < ASTStmt
 	@nombre
    @asignacion
    @indice
-	attr_reader :nombre, :asignacion, :indice
+	attr_accessor :nombre, :asignacion, :indice
 	
 	def initialize(a,b,c)
 		@nombre=a
@@ -264,11 +264,15 @@ end
 class ASTBlock < ASTStmt
 
    @instrucciones
-	attr_reader :instrucciones
+	attr_accessor :instrucciones
 	
 	def initialize()
 		@instrucciones=[]
    end
+	
+	def add(a)
+		@instrucciones<<a
+	end
 	
 	def check(tabla)
 		return @instrucciones.each{|x| print x, " -- " }
@@ -283,11 +287,15 @@ end
 class ASTMainBlock < ASTStmt
 
    @instrucciones
-	attr_reader :instrucciones
+	attr_accessor :instrucciones
 	
 	def initialize()
 		@instrucciones=[]
    end
+	
+	def add(a)
+		@instrucciones.push(a)
+	end
 	
 	def check(tabla)
 		return @instrucciones.each{|x| print x, " -- " }
@@ -295,6 +303,10 @@ class ASTMainBlock < ASTStmt
 
 	def run(tabla)
      @instrucciones.each{|x| x.run(tabla)}
+	end
+	
+	def to_s
+		@instrucciones.size.to_s
 	end
 end
 
