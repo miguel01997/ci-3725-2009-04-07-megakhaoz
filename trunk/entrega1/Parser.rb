@@ -13,10 +13,12 @@ require 'Sym.rb'
 
 class Parser < Racc::Parser
 
-module_eval <<'..end Parser.y modeval..id5018e3379e', 'Parser.y', 13
+module_eval <<'..end Parser.y modeval..ida95a7d6a14', 'Parser.y', 13
 @ultimo_token_leido
 @tabla_de_simbolos
+@arbol_main
 def initialize(l)
+	@arbol_main= ASTMainBlock.new
    @tabla_de_simbolos=SymTable.new
    @lex =l
 end
@@ -39,7 +41,7 @@ def next_token
    if t== nil then return [false,false] end
    if t!=nil then return [t.class.to_s.to_sym, t.value] end
 end
-..end Parser.y modeval..id5018e3379e
+..end Parser.y modeval..ida95a7d6a14
 
 ##### racc 1.4.5 generates ###
 
@@ -486,28 +488,28 @@ Racc_debug_parser = false
 
 module_eval <<'.,.,', 'Parser.y', 17
   def _reduce_1( val, _values, result )
-puts "START -> MAIN"; puts ""; puts @tabla_de_simbolos
+puts "START -> MAIN"; puts ""; puts @tabla_de_simbolos;@arbol_main.run(@tabla_de_simbolos)
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 18
   def _reduce_2( val, _values, result )
-puts "START -> VAR MAIN"; puts ""; puts @tabla_de_simbolos
+puts "START -> VAR MAIN"; puts ""; puts @tabla_de_simbolos;@arbol_main.run(@tabla_de_simbolos)
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 19
   def _reduce_3( val, _values, result )
-puts "START -> PROC MAIN"; puts ""; puts @tabla_de_simbolos
+puts "START -> PROC MAIN"; puts ""; puts @tabla_de_simbolos;@arbol_main.run(@tabla_de_simbolos)
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 20
   def _reduce_4( val, _values, result )
-puts "START -> VAR PROC MAIN"; puts ""; puts @tabla_de_simbolos
+puts "START -> VAR PROC MAIN"; puts ""; puts @tabla_de_simbolos;@arbol_main.run(@tabla_de_simbolos)
    result
   end
 .,.,
@@ -612,7 +614,7 @@ puts "PARAMETRO -> PARAMETRO , out TokId(#{val[1]})"; x=val[0]; x.push([true, va
 
 module_eval <<'.,.,', 'Parser.y', 42
   def _reduce_19( val, _values, result )
-puts "P_INSTRUCCION -> skip"; return ""
+puts "P_INSTRUCCION -> skip"; return ASTSkip.new(0)
    result
   end
 .,.,
@@ -738,7 +740,7 @@ puts "ASIGNARRAY -> TokId(#{val[0]}) [ EXPRESION ] , ASIGNARRAY , EXPRESION"; re
 
 module_eval <<'.,.,', 'Parser.y', 65
   def _reduce_37( val, _values, result )
-puts "EXPRESION -> TokNum(#{val[0]})"; return ASTNumber.new(val[0])
+puts "EXPRESION -> TokNum(#{val[0]})"; return ASTNumber.new(val[0]);
    result
   end
 .,.,
@@ -759,77 +761,77 @@ puts "EXPRESION -> $(#{val[1]})"; return ASTArraySize.new(val[1])
 
 module_eval <<'.,.,', 'Parser.y', 68
   def _reduce_40( val, _values, result )
-puts "EXPRESION -> EXPRESION EXPROPER"; return ""
+puts "EXPRESION -> EXPRESION EXPROPER"; return ASTMathOp.new(val[0],val[1][1],val[1][0])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 69
   def _reduce_41( val, _values, result )
-puts "EXPRESION -> ( EXPRESION )"; return ""
+puts "EXPRESION -> ( EXPRESION )"; return val[1]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 70
   def _reduce_42( val, _values, result )
-puts "EXPRESION -> TokId(#{val[0]}) [EXPRESION]"; return ""
+puts "EXPRESION -> TokId(#{val[0]}) [EXPRESION]"; return ASTArrayId.new(val[0],val[2])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 71
   def _reduce_43( val, _values, result )
-puts "EXPRESION -> - TokNum(#{val[1]})"; return ""
+puts "EXPRESION -> - TokNum(#{val[1]})"; return ASTMath.new(ASTNumber.new(-1),"*",val[1])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 72
   def _reduce_44( val, _values, result )
-puts "EXPRESION -> - TokId(#{val[1]})"; return ""
+puts "EXPRESION -> - TokId(#{val[1]})"; return ASTMath.new(ASTNumber.new(-1),"*",val[1])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 73
   def _reduce_45( val, _values, result )
-puts "EXPRESION -> - ( EXPRESION )"; return ""
+puts "EXPRESION -> - ( EXPRESION )"; return ASTMath.new(ASTNumber.new(-1),"*",val[2])
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 76
   def _reduce_46( val, _values, result )
-puts "EXPROPER -> * EXPRESION"; return ""
+puts "EXPROPER -> * EXPRESION"; return ["*",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 77
   def _reduce_47( val, _values, result )
-puts "EXPROPER -> - EXPRESION"; return ""
+puts "EXPROPER -> - EXPRESION"; return ["-",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 78
   def _reduce_48( val, _values, result )
-puts "EXPROPER -> + EXPRESION"; return ""
+puts "EXPROPER -> + EXPRESION"; return ["+",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 79
   def _reduce_49( val, _values, result )
-puts "EXPROPER -> / EXPRESION"; return ""
+puts "EXPROPER -> / EXPRESION"; return ["/",val[1]]
    result
   end
 .,.,
 
 module_eval <<'.,.,', 'Parser.y', 80
   def _reduce_50( val, _values, result )
-puts "EXPROPER -> % EXPRESION"; return ""
+puts "EXPROPER -> % EXPRESION"; return ["%",val[1]]
    result
   end
 .,.,
@@ -892,7 +894,7 @@ puts "INSTRUCCION -> TokId(#{val[0]}) ( LIST_EXPR )"; return ""
 
 module_eval <<'.,.,', 'Parser.y', 91
   def _reduce_59( val, _values, result )
-puts "INSTRUCCION -> show EXPRESION"; return ""
+puts "INSTRUCCION -> show EXPRESION"; return @arbol_main.add(ASTShow.new(val[1]))
    result
   end
 .,.,

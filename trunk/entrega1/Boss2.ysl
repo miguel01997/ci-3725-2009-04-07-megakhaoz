@@ -10,6 +10,7 @@ var b2,b3,b4,b5,b6:array of 20
 
 main
 skip;
+show 2+3;
 if true -> skip
 | false -> skip
 fi
