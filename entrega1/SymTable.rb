@@ -34,10 +34,10 @@ class SymTable
    end
 
    def insertProc(id,par,var,ins) # inserta un procedimiento en la tabla
-      p id
-      p par
-      p var
-      p ins
+      t=SymTable.new()
+      par.each {|x| if x[0] then t.insert(SymIn.new(x[1].value,x[1].line,x[1].col)) else t.insert(SymOut.new(x[1].value,x[1].line,x[1].col)) end}
+      var.each {|x| t.insertVars(x[0],x[1])}
+      insert(SymProc.new(id,0,0,ins,t))
    end
 	
    def insert(symbol) # retornando el Symbol recien insertado o nil.

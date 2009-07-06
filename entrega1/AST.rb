@@ -351,8 +351,9 @@ class ASTRepeat < ASTStmt
       @instruccion<<b
    end
    
-   def check(tabla)
-      return @guardia.check(tabla)&&@instruccion.check(tabla)
+   def check(tabla) #ESTO ESTA MALO
+      # return @guardia.check(tabla)&&@instruccion.check(tabla)
+      return true
    end
    
    def run(tabla)
@@ -376,6 +377,7 @@ class ASTSelect < ASTStmt
    
    def check(tabla) #ESTO ESTA MALO
       #return @guardia.check(tabla)&&@instruccion.check(tabla)
+      return true
    end
    
    def run(tabla)
@@ -385,4 +387,18 @@ end
 
 # Arbol para procedimientos
 class ASTProc < ASTStmt
+@variables
+@nombre
+   def initialize(n, v)
+      @variables=v
+      @nombre=n
+   end
+   
+   def check(tabla)
+      #chequear variables internas y de base de datos
+   end
+
+   def run(tabla)
+      
+   end
 end
