@@ -8,23 +8,29 @@ var a2,a3,a4,a5,a6:value
 var b1:array of 10
 var b2,b3,b4,b5,b6:array of 20
 
-    proc pepe (in a, out b) as var i,j: value var c : value do i<10 -> begin i<-i+1;show i end od
+    proc pepe (in a, in a1, out b) as var i,j: value var c : value begin i<-0; do i<10 -> begin i<-i+1;show i end od; show a; show a2 end 
+
 
 main
-skip;
-a2,a4<-5,6;
-b6[a4]<-7;
-a1,b2[3],a5,b4[a2+b6[a4]]<-1,2,3,4;
-show b6[a4];
-skip;
-show 2+3;
-show 'jojo';
-show "hahaha";
-show 3;
-if 2>=2 -> show "2>=2"
-| true -> show b6[a4]
-| true -> show "3"
-fi;
-pepe(a2,a4);
-show a2
+a1<-4;
+a2<-5;
+a3,a4<-0,10;
+pepe (3,a4)
+{#;
+   a2,a4<-5,6;
+   b6[a4]<-7;
+   a1,b2[3],a5,b4[a2+b6[a4]]<-1,2,3,4;
+   show b6[a4];
+   skip;
+   show 2+3;
+   show 'jojo';
+   show "hahaha";
+   show 3;
+   if 2>=2 -> show "2>=2"
+   | true -> show b6[a4]
+   | true -> show "3"
+   fi;
+   pepe(a2,a4);
+   show a2;
+#}
 end
