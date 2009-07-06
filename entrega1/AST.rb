@@ -27,12 +27,15 @@ end
 
 # AST para guardar valores númericos.
 class ASTNumber < ASTMath
-   def check(tabla)
+   def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		return true
    end
    
-   def run(tabla)
+   def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
    end
+   
 end
 
 # AST para guardar identificadores.
@@ -44,14 +47,16 @@ class ASTId < ASTMath
 		@nombre=c
    end
 	
-	def check(tabla)
-		if tabla.find(@nombre)==nil then return nil 
+	def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
+		if tabla.findVar(proc,@nombre)==nil then return nil 
 		else return true
 		end
 	end
 
-	def run(tabla)
-		@val= tabla.find(@nombre).getValue
+	def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+		@val= tabla.findVar(proc,@nombre).getValue
 	end
 end
 
@@ -64,14 +69,16 @@ class ASTArraySize < ASTMath
 		@nombre=c
    end
 	
-	def check(tabla)
+	def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		if tabla.findArray(@nombre)==nil then return nil 
 		else return true
 		end
 	end
 
-	def run(tabla)
-		@val= tabla.find(@nombre).size()
+	def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+		@val= tabla.findArray(@nombre).size()
 	end
 end
 
@@ -86,14 +93,16 @@ class ASTArrayId < ASTMath
       @indice=b
    end
 	
-	def check(tabla)
+	def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		if tabla.findArray(@nombre)==nil then return nil 
 		else return @indice.check(tabla)
 		end
 	end
 
-	def run(tabla)
-      @indice.run(tabla)
+	def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+      @indice.run(tabla,proc)
 		@val= tabla.findArray(@nombre).getValue_at(@indice.val)
 	end
 end
@@ -114,13 +123,15 @@ class ASTMathOp < ASTMath
 		unless ( @der.is_a?(ASTMath) ) then raise ArgumentError, "El operando derecho no és una expresión aricmética." end
 	end
 	
-   def check(tabla)
+   def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		return (@izq.check(tabla) && @der.check(tabla)) 
    end
    
-   def run(tabla)
-		if @izq.is_a?(ASTMath) then @izq.run(tabla) end
-		if @der.is_a?(ASTMath) then @der.run(tabla) end
+   def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+		if @izq.is_a?(ASTMath) then @izq.run(tabla,proc) end
+		if @der.is_a?(ASTMath) then @der.run(tabla,proc) end
 		op1=@izq
 		op2=@der
 		
@@ -132,11 +143,13 @@ class ASTBool < AST
 end
 
 class ASTBoolCte < ASTBool
-   def check(tabla)
+   def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		return true
    end
    
-   def run(tabla)
+   def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
    end
 end
 
@@ -148,11 +161,13 @@ class ASTBoolNeg < ASTBool
 		unless ( c.is_a?(ASTBool) ) then raise ArgumentError, "Solo puede aplicarse negacion a una expresion logica." end
       @nombre=c
    end
-   def check(tabla)
+   def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		return @nombre.check(tabla)
    end
    
-   def run(tabla)
+   def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
    end
 end
 
@@ -170,13 +185,15 @@ class ASTBoolOp < ASTBool
       @op= c
 	end	
 
-   def check(tabla)
+   def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		return (@izq.check(tabla) && @der.check(tabla)) 
    end
    
-   def run(tabla)
-		if (@izq.is_a?(ASTBool) || @izq.is_a?(ASTMath)) then @izq.run(tabla) end
-		if (@der.is_a?(ASTBool) || @der.is_a?(ASTMath)) then @der.run(tabla) end
+   def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+		if (@izq.is_a?(ASTBool) || @izq.is_a?(ASTMath)) then @izq.run(tabla,proc) end
+		if (@der.is_a?(ASTBool) || @der.is_a?(ASTMath)) then @der.run(tabla,proc) end
       
 		op1=@izq
 		op2=@der
@@ -192,22 +209,26 @@ end
 # Arbol para la instruccion skip
 class ASTSkip < ASTStmt
 
-   def check(tabla)
+   def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		return true
    end
    
-   def run(tabla)
+   def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
    end
 end
 
 # Arbol para la instruccion show
 class ASTShow < ASTStmt
-   def check(tabla)
+   def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		return true
    end
    
-   def run(tabla)
-		if @val.is_a?(ASTMath) then @val.run(tabla) end 
+   def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+		if @val.is_a?(ASTMath) then @val.run(tabla,proc) end 
 		puts @val.to_s
    end
 end
@@ -223,15 +244,17 @@ class ASTAssign < ASTStmt
       @asignacion=b
    end
 	
-	def check(tabla)
-		if tabla.findVar(@nombre)==nil then return nil 
+	def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
+		if tabla.findVar(proc,@nombre)==nil then return nil 
 		else return @asignacion.check(tabla)
 		end
 	end
 
-	def run(tabla)
-      @asignacion.run(tabla)
-		@val= tabla.findVar(@nombre).setValue(@asignacion.val)
+	def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+      @asignacion.run(tabla,proc)
+		@val= tabla.findVar(proc,@nombre).setValue(@asignacion.val)
 	end
 end
 
@@ -253,12 +276,14 @@ class ASTMultAssign < ASTStmt
                                                             else @lista_assig<<ASTAssign.new(@nombres[x],@asignaciones[x]) end}
    end
 	
-	def check(tabla)
+	def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
       @lista_assig.each {|x| x.check(tabla)}
 	end
 
-	def run(tabla)
-      @lista_assig.each {|x| x.run(tabla)}
+	def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+      @lista_assig.each {|x| x.run(tabla,proc)}
 	end
 end
 
@@ -275,15 +300,17 @@ class ASTArrayAssign < ASTStmt
       @asignacion=c
    end
 	
-	def check(tabla)
-		if tabla.findVar(@nombre)==nil then return nil 
+	def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
+		if tabla.findVar(proc,@nombre)==nil then return nil 
 		else return @asignacion.check(tabla) && @indice.check(tabla) 
 		end
 	end
 
-	def run(tabla)
-      @asignacion.run(tabla)
-      @indice.run(tabla)
+	def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+      @asignacion.run(tabla,proc)
+      @indice.run(tabla,proc)
 		@val= tabla.findArray(@nombre).setValue(@indice.val,@asignacion.val)
 	end
 end
@@ -302,12 +329,14 @@ class ASTBlock < ASTStmt
 		@instrucciones.push(a)
 	end
 
-	def check(tabla)
+	def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		return @instrucciones.each{|x| print x, " -- " }
 	end
 
-	def run(tabla)
-     @instrucciones.each{|x| x.run(tabla)}
+	def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+     @instrucciones.each{|x| x.run(tabla,proc)}
 	end
 end
 
@@ -325,12 +354,14 @@ class ASTMainBlock < ASTStmt
 		@instrucciones.push(a)
 	end
 
-	def check(tabla)
+	def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
 		return @instrucciones.each{|x| print x, " -- " }
 	end
 
-	def run(tabla)
-     @instrucciones.each{|x| x.run(tabla)}
+	def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+     @instrucciones.each{|x| x.run(tabla,proc)}
 	end
 end
 
@@ -351,15 +382,17 @@ class ASTRepeat < ASTStmt
       @instruccion<<b
    end
    
-   def check(tabla) #ESTO ESTA MALO
+   def check(tabla,proc)
+      #aqui podria ir el if loco de malledo #ESTO ESTA MALO
       # return @guardia.check(tabla)&&@instruccion.check(tabla)
       return true
    end
    
-   def run(tabla)
+   def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
       again= false;
-      @guardia.each_index{|x| @guardia[x].run(tabla);if (@guardia[x].val) then @instruccion[x].run(tabla);again=true;break;return; end}
-      if (again) then self.run(tabla) end
+      @guardia.each_index{|x| @guardia[x].run(tabla,proc);if (@guardia[x].val) then @instruccion[x].run(tabla,proc);again=true;break;return; end}
+      if (again) then self.run(tabla,proc) end
    end
 end
 
@@ -375,13 +408,15 @@ class ASTSelect < ASTStmt
       a.each {|x| @guardia<<x[0];@instruccion<<x[1] }
    end
    
-   def check(tabla) #ESTO ESTA MALO
+   def check(tabla,proc)
+      #aqui podria ir el if loco de malledo #ESTO ESTA MALO
       #return @guardia.check(tabla)&&@instruccion.check(tabla)
       return true
    end
    
-   def run(tabla)
-      @guardia.each_index{|x| @guardia[x].run(tabla);if (@guardia[x].val) then @instruccion[x].run(tabla);break;return; end}
+   def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
+      @guardia.each_index{|x| @guardia[x].run(tabla,proc);if (@guardia[x].val) then @instruccion[x].run(tabla,proc);break;return; end}
    end
 end
 
@@ -394,11 +429,13 @@ class ASTProc < ASTStmt
       @nombre=n
    end
    
-   def check(tabla)
+   def check(tabla,proc)
+      #aqui podria ir el if loco de malledo
       #chequear variables internas y de base de datos
    end
 
-   def run(tabla)
+   def run(tabla,proc)
+      #aqui podria ir el if loco de malledo
       
    end
 end
