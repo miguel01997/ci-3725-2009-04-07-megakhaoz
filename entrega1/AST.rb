@@ -294,14 +294,14 @@ class ASTBlock < ASTStmt
    @instrucciones
 	attr_accessor :instrucciones
 	
-	def initialize()
-		@instrucciones=[]
+	def initialize(a)
+		@instrucciones=a
    end
 	
-	def add(a)
-		@instrucciones<<a
+	def add(a) #DEPRECATED
+		@instrucciones.push(a)
 	end
-	
+
 	def check(tabla)
 		return @instrucciones.each{|x| print x, " -- " }
 	end
@@ -332,10 +332,6 @@ class ASTMainBlock < ASTStmt
 	def run(tabla)
      @instrucciones.each{|x| x.run(tabla)}
 	end
-	
-	def to_s
-		@instrucciones.size.to_s
-	end
 end
 
 # Arbol para la instruccion  repeticion
@@ -347,7 +343,7 @@ class ASTRepeat < ASTStmt
    def initialize(a)
       @guardia=[]
       @instruccion=[]
-      a.each {|x| @guardia<<[a[0]];@instruccion<<[a[1]] }
+      a.each {|x| @guardia<<x[0];@instruccion<<x[1] }
    end
    
    def add(a,b)
@@ -361,7 +357,7 @@ class ASTRepeat < ASTStmt
    
    def run(tabla)
       again= false;
-      @guardia.each_index{|x| if (x) then @instruccion[x].run(tabla);again=true;break; end}
+      @guardia.each_index{|x| @guardia[x].run(tabla);if (@guardia[x].val) then @instruccion[x].run(tabla);again=true;break;return; end}
       if (again) then self.run(tabla) end
    end
 end

@@ -18,8 +18,12 @@ show 2+3;
 show 'jojo';
 show "hahaha";
 show 3;
-if false -> show "1"
+if 2>=2 -> show "2>=2"
 | true -> show b6[a4]
 | true -> show "3"
-fi
+fi;
+a2<- 0;
+do a2<10 -> begin a2<-a2+1;show a2 end 
+od;
+show a2
 end

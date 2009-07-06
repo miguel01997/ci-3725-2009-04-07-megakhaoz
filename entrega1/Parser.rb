@@ -13,7 +13,7 @@ require 'Sym.rb'
 
 class Parser < Racc::Parser
 
-module_eval <<'..end Parser.y modeval..id6c83e7dfac', 'Parser.y', 15
+module_eval <<'..end Parser.y modeval..idd6fa98ca3f', 'Parser.y', 15
 @ultimo_token_leido
 @tabla_de_simbolos
 @arbol_main
@@ -41,7 +41,7 @@ def next_token
    if t== nil then return [false,false] end
    if t!=nil then return [t.class.to_s.to_sym, t.value] end
 end
-..end Parser.y modeval..id6c83e7dfac
+..end Parser.y modeval..idd6fa98ca3f
 
 ##### racc 1.4.5 generates ###
 
@@ -847,7 +847,7 @@ puts "INSTRUCCION -> ASIGNACION"; return ASTMultAssign.new(val[0])
 
 module_eval <<'.,.,', 'Parser.y', 84
   def _reduce_53( val, _values, result )
-puts "INSTRUCCION -> begin LIST_INST end"; return ""
+puts "INSTRUCCION -> begin LIST_INST end"; return ASTBlock.new(val[1])
    result
   end
 .,.,
@@ -861,7 +861,7 @@ puts "INSTRUCCION -> if SELECCION fi"; return ASTSelect.new(val[1])
 
 module_eval <<'.,.,', 'Parser.y', 86
   def _reduce_55( val, _values, result )
-puts "INSTRUCCION -> do SELECCION od"; return ""
+puts "INSTRUCCION -> do SELECCION od"; return ASTRepeat.new(val[1])
    result
   end
 .,.,
