@@ -57,7 +57,7 @@ class SymArray < Sym
    end
 
    def getValue_at(i)
-      unless (i.is_a?(Numeric)) then raise ArgumentError, "El indice de un arreglo debe ser un numero." end
+      unless (i.is_a?(Numeric)) then raise ArgumentError, "El indice de un arreglo debe ser un numero.#{i.class}" end
       unless (0<=i && i<@lenght) then raise ArgumentError, "El indice del arreglo esta fuera del rango: 0~#{(@lenght-1)}." end
       return @valor[i]
    end
@@ -67,7 +67,7 @@ class SymArray < Sym
    end
    
    def setValue(i,x)
-      unless (i.is_a?(Numeric)) then raise ArgumentError, "El indice de un arreglo debe ser un numero." end
+      unless (i.is_a?(Numeric)) then raise ArgumentError, "El indice de un arreglo debe ser un numero. " end
       unless (0<=i && i<@lenght) then raise ArgumentError, "El indice del arreglo esta fuera del rango: 0~#{(@lenght-1)}." end
       unless (x.is_a?(Numeric)) then raise ArgumentError, "El contenido de un valor en el arreglo debe ser un numero." end
       @valor[i] = x
