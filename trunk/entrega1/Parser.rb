@@ -13,7 +13,7 @@ require 'Sym.rb'
 
 class Parser < Racc::Parser
 
-module_eval <<'..end Parser.y modeval..id7c1a29eea7', 'Parser.y', 26
+module_eval <<'..end Parser.y modeval..id0119f0d3de', 'Parser.y', 26
 @ultimo_token_leido
 @tabla_de_simbolos
 @arbol_main
@@ -45,7 +45,7 @@ def next_token
    if t== nil then return [false,false] end
    if t!=nil then return [t.class.to_s.to_sym, t.value] end
 end
-..end Parser.y modeval..id7c1a29eea7
+..end Parser.y modeval..id0119f0d3de
 
 ##### racc 1.4.5 generates ###
 

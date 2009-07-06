@@ -4,7 +4,8 @@ class Sym
    @nombre
    @lin #npi
    @col #npi
-	attr_accessor :nombre, :lin, :col
+   @posicion
+	attr_accessor :nombre, :lin, :col, :posicion
 	
    def initialize(a=0,b=0,c=0)
       unless (c.is_a?(Numeric)) then raise ArgumentError, "El valor de las columnas debe ser un numérico." end
@@ -13,6 +14,7 @@ class Sym
       @nombre=a
       @lin= b
       @col= c
+      @posicion=nil
    end
    
    def to_s
@@ -102,7 +104,7 @@ class SymProc < Sym
    end
 
    def close
-      if (@bpila_a.pop==nil) then raise "Se intenta cerrar un arbol que no esta abierto" end
+      if (@pila_a.pop==nil) then raise "Se intenta cerrar un arbol que no esta abierto" end
       if (@pila_t.pop==nil) then raise "Se intenta cerrar una tabla que no esta abierta" end
    end   
    
@@ -134,6 +136,11 @@ end
 
 # clase simbolo para una variable entero de entrada
 class SymIn < SymVar
+   def initialize(a,b,c,pos)
+      super(a,b,c) 
+      @posicion=pos
+   end
+   
    def setValue(x)
       raise "Intento de escritura en una variable de entrada"
    end
@@ -141,7 +148,18 @@ end
 
 # clase simbolo para una variable entero de salida
 class SymOut < SymVar
+   def initialize(a,b,c,pos)
+      super(a,b,c) 
+      @posicion=pos
+   end
+   
    def getValue
       raise "Intento de lectura en una variable de salida"
+   end
+   
+   def getValueOut
+      v=@valor
+      @valor=nil
+      return v
    end
 end

@@ -426,16 +426,39 @@ class ASTProc < ASTStmt
 @nombre
    def initialize(n, v)
       @variables=v
+      p v
       @nombre=n
+      p n
    end
    
    def check(tabla,proc)
-      #aqui podria ir el if loco de malledo
-      #chequear variables internas y de base de datos
+      unless proc==nil then raise "un procedimiento no debe usar la tabla de ningun otro procedimiento" end
+      temp_proc = tabla.findProc(@nombre)
+      temp_proc.open
+      check=temp_proc.getArbol.check(tabla,@nombre)
+      temp_proc.close
+      @variables.each {|x| check = check && x.check} # revisar que out sean variables. (in puede ser caulquier cosa)
+      return check
    end
 
    def run(tabla,proc)
-      #aqui podria ir el if loco de malledo
-      
+      unless proc==nil then raise "un procedimiento no debe usar la tabla de ningun otro procedimiento" end
+      temp_proc = tabla.findProc(@nombre)
+      temp_proc.open
+      temp_tabla=temp_proc.getTable
+      @variables.each_index{|i| x=temp_tabla.findInOut(i); if x.is_a?(SymIn) then @variables[i].run; x.setValue(@variables[i]) end}
+      temp_proc.getArbol.run(tabla,@nombre)
+      @variables.each_index{|i| 
+         x=temp_tabla.findInOut(i)
+         if x.is_a?(SymOut)
+            v=@variables[i]
+            if (v.is_a?(ASTId))
+               ASTAssign.new([v.nombre,ASTNumber(x.getValueOut)]).run(tabla,nil)
+            else
+               ASTArrayAssign.new([v.nombre,v.indice,ASTNumber(x.getValueOut)]).run(tabla,nil)
+            end
+         end
+      }
+      temp_proc.close   
    end
 end

@@ -35,7 +35,7 @@ class SymTable
 
    def insertProc(id,par,var,ins,tok) # inserta un procedimiento en la tabla
       t=SymTable.new()
-      par.each {|x| if x[0] then t.insert(SymIn.new(x[1].value,x[1].line,x[1].col)) else t.insert(SymOut.new(x[1].value,x[1].line,x[1].col)) end}
+      par.each_index {|i| if par[i][0] then t.insert(SymIn.new(par[i][1].value,par[i][1].line,par[i][1].col,i)) else t.insert(SymOut.new(par[i][1].value,par[i][1].line,par[i][1].col,i)) end}
       var.each {|x| t.insertVars(x[0],x[1])}
       insert(SymProc.new(id,tok.line,tok.col,ins,t))
    end
@@ -61,13 +61,20 @@ class SymTable
       return (findVar(string) || findArray(string) || findProc(string))
    end
    
+   def findInOut(i) # retornando el Symbol encontrado o nil. 
+   # Este procedimiento es especial, busca primero si existe la variable en el procedimiento dado. y de no existir entonces busca en la tabla de simbolos.
+   # si proc es nil entonces solo busca en la tabla de simbolos
+      @tablaVar.each {|y| if(y[1].posicion==i) then return y end}
+      raise "El indice buscado no existe (llamada a procedimiento con mas argumentos que los necesarios)"
+   end
+   
    def findVar(proc,string) # retornando el Symbol encontrado o nil. 
    # Este procedimiento es especial, busca primero si existe la variable en el procedimiento dado. y de no existir entonces busca en la tabla de simbolos.
    # si proc es nil entonces solo busca en la tabla de simbolos
       if proc!=nil
          x=findProc(proc)
          if x!=nil
-            y=x.findVar(nil,string)
+            y=x.getTable.findVar(nil,string)
             if y!=nil
                return y
             end
