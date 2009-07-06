@@ -9,9 +9,17 @@ var b1:array of 10
 var b2,b3,b4,b5,b6:array of 20
 
 main
+a2,a4<-5,6;
+b6[a4]<-7;
+a1,b2[3],a5,b4[a2+b6[a4]]<-1,2,3,4;
+show b6[a4];
 skip;
 show 2+3;
-if true -> skip
-| false -> skip
+show 'jojo';
+show "hahaha";
+show 3;
+if false -> show "1"
+| true -> show b6[a4]
+| true -> show "3"
 fi
 end

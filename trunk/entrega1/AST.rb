@@ -235,6 +235,33 @@ class ASTAssign < ASTStmt
 	end
 end
 
+# Arbol para la instruccion  asignaciones de variables
+class ASTMultAssign < ASTStmt
+	@nombres
+   @asignaciones
+   @lista_assig
+	attr_accessor :nombres, :asignaciones, :lista_assig
+	
+	def initialize(a)
+      @nombres=[]
+      @asignaciones=[]
+      @lista_assig=[]
+      a.each do |x| @nombres.push(x[0]);@asignaciones.push(x[1]) end
+      @nombres.reverse!
+
+      @nombres.each_index{ |x| if(@nombres[x].is_a?(Array)) then @lista_assig<<ASTArrayAssign.new(@nombres[x][0],@nombres[x][1],@asignaciones[x])
+                                                            else @lista_assig<<ASTAssign.new(@nombres[x],@asignaciones[x]) end}
+   end
+	
+	def check(tabla)
+      @lista_assig.each {|x| x.check(tabla)}
+	end
+
+	def run(tabla)
+      @lista_assig.each {|x| x.run(tabla)}
+	end
+end
+
 # Arbol para la instruccion  asignacion aun arreglo en un indice
 class ASTArrayAssign < ASTStmt
 	@nombre
@@ -256,6 +283,7 @@ class ASTArrayAssign < ASTStmt
 
 	def run(tabla)
       @asignacion.run(tabla)
+      @indice.run(tabla)
 		@val= tabla.findArray(@nombre).setValue(@indice.val,@asignacion.val)
 	end
 end
@@ -289,14 +317,14 @@ class ASTMainBlock < ASTStmt
    @instrucciones
 	attr_accessor :instrucciones
 	
-	def initialize()
-		@instrucciones=[]
+	def initialize(a)
+		@instrucciones=a
    end
 	
-	def add(a)
+	def add(a) #DEPRECATED
 		@instrucciones.push(a)
 	end
-	
+
 	def check(tabla)
 		return @instrucciones.each{|x| print x, " -- " }
 	end
@@ -312,10 +340,51 @@ end
 
 # Arbol para la instruccion  repeticion
 class ASTRepeat < ASTStmt
+   @guardia
+   @instruccion
+   attr_accessor :guardia, :instruccion
+   
+   def initialize(a)
+      @guardia=[]
+      @instruccion=[]
+      a.each {|x| @guardia<<[a[0]];@instruccion<<[a[1]] }
+   end
+   
+   def add(a,b)
+      @guardia<<a
+      @instruccion<<b
+   end
+   
+   def check(tabla)
+      return @guardia.check(tabla)&&@instruccion.check(tabla)
+   end
+   
+   def run(tabla)
+      again= false;
+      @guardia.each_index{|x| if (x) then @instruccion[x].run(tabla);again=true;break; end}
+      if (again) then self.run(tabla) end
+   end
 end
 
 # Arbol para la instruccion seleccion  
 class ASTSelect < ASTStmt
+   @guardia
+   @instruccion
+   attr_accessor :guardia, :instruccion
+   
+   def initialize(a)
+      @guardia=[]
+      @instruccion=[]
+      a.each {|x| @guardia<<x[0];@instruccion<<x[1] }
+   end
+   
+   def check(tabla) #ESTO ESTA MALO
+      #return @guardia.check(tabla)&&@instruccion.check(tabla)
+   end
+   
+   def run(tabla)
+      @guardia.each_index{|x| @guardia[x].run(tabla);if (@guardia[x].val) then @instruccion[x].run(tabla);break;return; end}
+   end
 end
 
 # Arbol para procedimientos
