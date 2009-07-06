@@ -128,6 +128,9 @@ class SymProc < Sym
    end
 	
 	def to_s
+   p @arbol
+   puts ""
+   puts @tabla
       "(Fila: #{@lin.to_s}, Columna: #{@col.to_s}) #{self.class.to_s} #{@nombre.to_s} <SymArbol:#{@arbol.object_id}> <SymTable:#{@tabla.object_id}>"  
    end
 end
